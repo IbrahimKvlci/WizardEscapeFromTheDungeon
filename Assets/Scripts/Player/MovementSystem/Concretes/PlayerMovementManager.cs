@@ -11,12 +11,9 @@ public class PlayerMovementManager : IPlayerMovementService
         _inputService = inputService;
     }
 
-    public void HandleJump(Player player)
+    public void Jump(Player player)
     {
-        if (_inputService.CheckJumpButton() && player.PlayerMovementController.Grounded)
-        {
             player.Rigidbody.velocity=new Vector3(player.Rigidbody.velocity.x,player.PlayerMovementController.JumpSpeed,player.Rigidbody.velocity.z);
-        }
     }
 
     public void HandleMovement(Player player)
@@ -24,9 +21,16 @@ public class PlayerMovementManager : IPlayerMovementService
         float horizontal=_inputService.GetMovementVector().x;
         float vertical=_inputService.GetMovementVector().y;
 
-        Vector3 moveVector=new Vector3(horizontal,0,vertical)*Time.deltaTime*player.PlayerMovementController.Speed;
-        player.transform.Translate(moveVector);
+        Vector3 moveVector=new Vector3(horizontal,0,vertical);
+        moveVector.Normalize();
+        player.transform.Translate(moveVector * Time.deltaTime * player.PlayerMovementController.Speed,Space.World);
 
         player.PlayerMovementController.IsRunning = moveVector != Vector3.zero;
+
+        if (player.PlayerMovementController.IsRunning)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(moveVector, Vector3.up);
+            player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, toRotation, 720 * Time.deltaTime);
+        }
     }
 }

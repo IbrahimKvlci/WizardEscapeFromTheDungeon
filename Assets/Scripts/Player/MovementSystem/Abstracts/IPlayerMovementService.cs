@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IPlayerMovementService
 {
     void HandleMovement(Player player);
-    void HandleJump(Player player);
+    void Jump(Player player);
 }
