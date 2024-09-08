@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     [field:SerializeField] public PlayerMovementController PlayerMovementController {  get; set; }
     [field:SerializeField] public Rigidbody Rigidbody { get; set; }
+    [field:SerializeField] public PlayerVisualController PlayerVisualController { get; set; }
 
     public IPlayerState PlayerIdleState { get; set; }
     public IPlayerState PlayerRunningState { get; set; }

@@ -13,6 +13,10 @@ public class PlayerMovementController : MonoBehaviour
     [field:SerializeField] public float Speed {  get; set; }
     [field: SerializeField] public float JumpSpeed { get; set; }
 
+    [SerializeField] private Camera camera;
+
+    Vector3 previousPos, lastMoveDirection;
+
     private bool _grounded;
     public bool Grounded
     {
@@ -60,6 +64,7 @@ public class PlayerMovementController : MonoBehaviour
     private IPlayerMovementService _playerMovementService;
     private IInputService _inputService;
 
+
     private void Awake()
     {
         _playerMovementService=InGameIoC.Instance.PlayerMovementService;
@@ -84,6 +89,8 @@ public class PlayerMovementController : MonoBehaviour
         {
             IsFalling = true;
         }
+
+        HandlePlayerForward();
     }
 
     private void HandleJump()
@@ -93,6 +100,32 @@ public class PlayerMovementController : MonoBehaviour
             _playerMovementService.Jump(player);
             Grounded= false;
             OnJump?.Invoke(this,EventArgs.Empty);
+        }
+    }
+
+
+    private void HandlePlayerForward()
+    {
+        if (IsRunning)
+        {
+            //Rotate Player
+
+            Quaternion toRotation = camera.transform.rotation;
+            toRotation.x = player.transform.rotation.x;
+            toRotation.z=player.transform.rotation.z;
+            player.transform.rotation=Quaternion.Lerp(player.transform.rotation,toRotation,Time.deltaTime*5);
+
+            //Rotate Player Visual
+            if (player.transform.position != previousPos)
+            {
+                lastMoveDirection = (player.transform.position - previousPos).normalized;
+                previousPos = player.transform.position;
+            }
+
+            Quaternion toRotationVisual = Quaternion.LookRotation(lastMoveDirection, Vector3.up);
+            toRotationVisual.x = 0;
+            toRotationVisual.z=0;
+            player.PlayerVisualController.transform.rotation = Quaternion.RotateTowards(player.PlayerVisualController.transform.rotation, toRotationVisual, 720 * Time.deltaTime);
         }
     }
 
