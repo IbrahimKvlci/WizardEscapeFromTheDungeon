@@ -78,19 +78,23 @@ public class PlayerMovementController : MonoBehaviour
         IsFalling = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
 
-        HandleJump();
         _playerMovementService.HandleMovement(player);
 
+        HandlePlayerForward();
+
+    }
+    private void Update()
+    {
+        HandleJump();
         //Grounded = player.Rigidbody.velocity.y ==0;
-        if (player.Rigidbody.velocity.y < -1&&player.Rigidbody.velocity.y>-2)
+        if (player.Rigidbody.velocity.y < -1 && player.Rigidbody.velocity.y > -2)
         {
             IsFalling = true;
         }
 
-        HandlePlayerForward();
     }
 
     private void HandleJump()
