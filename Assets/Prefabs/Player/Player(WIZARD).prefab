@@ -31,6 +31,52 @@ Transform:
   m_Father: {fileID: 8293427603149529215}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2210368724473693044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2322952527416135447}
+  - component: {fileID: 4197628530159424985}
+  m_Layer: 0
+  m_Name: AttackController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2322952527416135447
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2210368724473693044}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8293427603149529215}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4197628530159424985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2210368724473693044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d5719eb537542419067db730021600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 4
+  AttackTimerMax: 1
 --- !u!1 &2814609283561888427
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,6 +111,7 @@ Transform:
   - {fileID: 5284708330264289219}
   - {fileID: 6269906229680574034}
   - {fileID: 874939464072248976}
+  - {fileID: 2322952527416135447}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -82,6 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <PlayerMovementController>k__BackingField: {fileID: 1927312396302079326}
   <Rigidbody>k__BackingField: {fileID: 492008093915133733}
+  <PlayerVisualController>k__BackingField: {fileID: 0}
+  <PlayerAttackController>k__BackingField: {fileID: 0}
 --- !u!54 &492008093915133733
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -226,6 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 10
   <JumpSpeed>k__BackingField: 100
+  camera: {fileID: 0}
   player: {fileID: 7942368593129203756}
 --- !u!65 &2648764747549478133
 BoxCollider:

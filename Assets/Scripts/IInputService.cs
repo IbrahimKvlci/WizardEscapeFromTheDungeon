@@ -6,4 +6,5 @@ public interface IInputService
 {
     Vector2 GetMovementVector();
     bool CheckJumpButton();
+    bool FireButtonPressed();
 }

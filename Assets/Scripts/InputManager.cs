@@ -26,4 +26,9 @@ public class InputManager :MonoBehaviour, IInputService
     {
         return inputActions.Player.Movement.ReadValue<Vector2>();
     }
+
+    public bool FireButtonPressed()
+    {
+        return inputActions.Player.Fire.WasPressedThisFrame();
+    }
 }
