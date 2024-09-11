@@ -20,19 +20,19 @@ public class EnemyDetectController : MonoBehaviour
 
     private void HandleEnemyCameraDetect()
     {
-        if (Player.Instance.PlayerAttackController.TargetEnemy == null)
+        if (_enemyDetectService.IsVisibleInCamera(Camera.main, enemy))
         {
-            if (_enemyDetectService.IsVisibleInCamera(Camera.main, enemy))
+            if (!Player.Instance.PlayerAttackController.TargetEnemyList.Contains(enemy))
             {
-                Player.Instance.PlayerAttackController.TargetEnemy= enemy;
+                Player.Instance.PlayerAttackController.TargetEnemyList.Add(enemy);
                 Debug.Log("VISIBLE");
             }
         }
-        else if(Player.Instance.PlayerAttackController.TargetEnemy == enemy)
+        else
         {
-            if (!_enemyDetectService.IsVisibleInCamera(Camera.main, enemy))
+            if (Player.Instance.PlayerAttackController.TargetEnemyList.Contains(enemy))
             {
-                Player.Instance.PlayerAttackController.TargetEnemy = null;
+                Player.Instance.PlayerAttackController.TargetEnemyList.Remove(enemy);
             }
         }
     }

@@ -12,6 +12,7 @@ public class PlayerVisualController : MonoBehaviour
         IsWalking,
         JumpStartTrigger,
         IsDowning,
+        AttackTrigger,
     }
 
     private void Start()
@@ -20,6 +21,13 @@ public class PlayerVisualController : MonoBehaviour
         player.PlayerMovementController.OnGroundedChanged += PlayerMovementController_OnGroundedChanged;
         player.PlayerMovementController.OnJump += PlayerMovementController_OnJump;
         player.PlayerMovementController.OnFallingChanged += PlayerMovementController_OnFallingChanged;
+        player.PlayerAttackController.OnAttack += PlayerAttackController_OnAttack;
+
+    }
+
+    private void PlayerAttackController_OnAttack(object sender, System.EventArgs e)
+    {
+        TriggerAnimationById(AnimationEnum.AttackTrigger,Random.Range(1, 3));
     }
 
     private void PlayerMovementController_OnFallingChanged(object sender, System.EventArgs e)
@@ -58,5 +66,9 @@ public class PlayerVisualController : MonoBehaviour
     private void TriggerAnimation(AnimationEnum animationEnum)
     {
         animator.SetTrigger(animationEnum.ToString());
+    }
+    private void TriggerAnimationById(AnimationEnum animationEnum,int id)
+    {
+        animator.SetTrigger($"{animationEnum.ToString()}{id}");
     }
 }
