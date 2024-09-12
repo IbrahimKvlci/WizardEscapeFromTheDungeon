@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class InputManager :MonoBehaviour, IInputService
 {
     private InputActions inputActions;
+
+    public event EventHandler<IInputService.OnSwitchMagicPressedEventArgs> OnSwitchMagicPressed;
 
     public static InputManager Instance { get; set; }
 
@@ -15,6 +18,13 @@ public class InputManager :MonoBehaviour, IInputService
         inputActions=new InputActions();
 
         inputActions.Enable();
+
+        inputActions.Player.SwitchMagic.performed += SwitchMagic_performed;
+    }
+
+    private void SwitchMagic_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnSwitchMagicPressed?.Invoke(this, new IInputService.OnSwitchMagicPressedEventArgs { magicIndex=(int)inputActions.Player.SwitchMagic.ReadValue<float>()});
     }
 
     public bool CheckJumpButton()
@@ -30,5 +40,10 @@ public class InputManager :MonoBehaviour, IInputService
     public bool FireButtonPressed()
     {
         return inputActions.Player.Fire.WasPressedThisFrame();
+    }
+
+    public int GetMagicIndex()
+    {
+         return (int)inputActions.Player.SwitchMagic.ReadValueAsObject();
     }
 }

@@ -12,6 +12,7 @@ public class PlayerAttackController : MonoBehaviour
     [field: SerializeField] public float AttackFreezeTimerMax;
 
     [SerializeField] private Transform magicFireLoc;
+    [SerializeField] private Player player;
 
     public List<Enemy> TargetEnemyList { get; set; }
     public Enemy TargetEnemy { get; set; }
@@ -34,9 +35,18 @@ public class PlayerAttackController : MonoBehaviour
 
     private void Start()
     {
+        _inputService.OnSwitchMagicPressed += _inputService_OnSwitchMagicPressed;
+
         attackFreezeTimer = 0;
         targetEnemyIndex = 0;
         magicIndex = 0;
+        Magic = magicList[magicIndex];
+    }
+
+    private void _inputService_OnSwitchMagicPressed(object sender, IInputService.OnSwitchMagicPressedEventArgs e)
+    {
+        magicIndex = e.magicIndex;
+        Magic = magicList[magicIndex];
 
     }
 
@@ -70,18 +80,14 @@ public class PlayerAttackController : MonoBehaviour
             TargetEnemy=TargetEnemyList[targetEnemyIndex];
         }
         #endregion
-
-        #region SetMagic
-        if (magicList.Count > 0)
-        {
-            Magic= magicList[magicIndex];
-        }
-        #endregion
     }
 
     public IEnumerator Attack(Enemy enemy)
     {
+
         OnAttack?.Invoke(this, EventArgs.Empty);
+
+        player.PlayerMovementController.CanMove = false;
 
         MagicBase magicBase = Instantiate(Magic.MagicSO.prefab,magicFireLoc.transform.position,Quaternion.identity).GetComponent<MagicBase>();
         magicBase.TargetEnemy = enemy;
@@ -90,6 +96,7 @@ public class PlayerAttackController : MonoBehaviour
         attackFreezeTimer = 0;
         yield return new WaitForSeconds(AttackTimerMax);
         enemy.EnemyHealth.TakeDamage(Damage);
+        player.PlayerMovementController.CanMove = true;
         Debug.Log("Attacked" + enemy.name);
 
     }

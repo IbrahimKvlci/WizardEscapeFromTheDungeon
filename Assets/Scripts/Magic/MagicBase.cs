@@ -25,6 +25,15 @@ public class MagicBase : MonoBehaviour
             float transformPercantage=timer/MagicTimerMax;
 
             transform.position = Vector3.Slerp(startingPos, TargetEnemy.transform.position, transformPercantage);
+            if (transformPercantage >= 1f)
+            {
+                Destroy(this.gameObject);
+            }
         }
+    }
+
+    private void OnDestroy()
+    {
+        Instantiate(MagicSO.HitParticle, transform.position, Quaternion.identity);
     }
 }

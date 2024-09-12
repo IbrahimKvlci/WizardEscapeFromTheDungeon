@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: 
   prefab: {fileID: 7268005873785455843, guid: be182370881faa2468df929aa71858f5, type: 3}
+  HitParticle: {fileID: 4455119280873214597, guid: e6cfeec006566a448b4ff3a2c281cfb1,
+    type: 3}

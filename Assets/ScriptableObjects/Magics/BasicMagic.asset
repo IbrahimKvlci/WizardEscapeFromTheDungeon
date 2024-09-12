@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: BasicMagic
   m_EditorClassIdentifier: 
   title: 
-  prefab: {fileID: 7268005873785455843, guid: be182370881faa2468df929aa71858f5, type: 3}
+  prefab: {fileID: 9162011002752998958, guid: b0961f4a43181b448ae74627871e457a, type: 3}
+  HitParticle: {fileID: 7985154785658632933, guid: adb3f729b436048458e9cf3fccfa2f20,
+    type: 3}

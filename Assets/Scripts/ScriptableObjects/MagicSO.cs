@@ -7,4 +7,5 @@ public class MagicSO : ScriptableObject
 {
     public string title;
     public GameObject prefab;
+    public GameObject HitParticle;
 }

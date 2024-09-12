@@ -59,6 +59,8 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
+    public bool CanMove { get; set; }
+
     [SerializeField] private Player player;
 
     private IPlayerMovementService _playerMovementService;
@@ -76,19 +78,27 @@ public class PlayerMovementController : MonoBehaviour
         Grounded = true;
         IsRunning = false;
         IsFalling = false;
+        CanMove = true;
     }
 
     private void FixedUpdate()
     {
-
-        _playerMovementService.HandleMovement(player);
+        if (CanMove)
+        {
+            _playerMovementService.HandleMovement(player);
+        }
+        else
+        {
+            IsRunning = false;
+        }
 
         HandlePlayerForward();
 
     }
     private void Update()
     {
-        HandleJump();
+        if(CanMove) 
+            HandleJump();
         //Grounded = player.Rigidbody.velocity.y ==0;
         if (player.Rigidbody.velocity.y < -1 && player.Rigidbody.velocity.y > -2)
         {
