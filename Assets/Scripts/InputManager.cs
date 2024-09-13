@@ -46,4 +46,9 @@ public class InputManager :MonoBehaviour, IInputService
     {
          return (int)inputActions.Player.SwitchMagic.ReadValueAsObject();
     }
+
+    public bool DashButtonPressed()
+    {
+        return inputActions.Player.Dash.WasPressedThisFrame();
+    }
 }

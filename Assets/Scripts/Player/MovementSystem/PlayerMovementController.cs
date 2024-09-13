@@ -10,13 +10,14 @@ public class PlayerMovementController : MonoBehaviour
     public event EventHandler OnFallingChanged;
     public event EventHandler OnJump;
 
-    [field:SerializeField] public float Speed {  get; set; }
-    [field: SerializeField] public float JumpSpeed { get; set; }
-
+    [field:Header("References")]
+    [SerializeField] private Player player;
     [SerializeField] private Camera camera;
+    private IPlayerMovementService _playerMovementService;
+    private IInputService _inputService;
 
-    Vector3 previousPos, lastMoveDirection;
-
+    [field:Header("Jumping")]
+    [field: SerializeField] public float JumpSpeed { get; set; }
     private bool _grounded;
     public bool Grounded
     {
@@ -30,21 +31,6 @@ public class PlayerMovementController : MonoBehaviour
             OnGroundedChanged?.Invoke(this, EventArgs.Empty);
         }
     }
-
-    private bool _isRunning;
-    public bool IsRunning
-    {
-        get
-        {
-            return _isRunning;
-        }
-        set
-        {
-            _isRunning = value;
-            OnRunningChanged?.Invoke(this, EventArgs.Empty);
-        }
-    }
-
     private bool _isFalling;
     public bool IsFalling
     {
@@ -59,12 +45,25 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
+    [field:Header("Running")]
+    [field:SerializeField] public float Speed {  get; set; }
+    private bool _isRunning;
+    public bool IsRunning
+    {
+        get
+        {
+            return _isRunning;
+        }
+        set
+        {
+            _isRunning = value;
+            OnRunningChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+
+    Vector3 previousPos, lastMoveDirection;
     public bool CanMove { get; set; }
-
-    [SerializeField] private Player player;
-
-    private IPlayerMovementService _playerMovementService;
-    private IInputService _inputService;
 
 
     private void Awake()
@@ -97,9 +96,11 @@ public class PlayerMovementController : MonoBehaviour
     }
     private void Update()
     {
-        if(CanMove) 
+        if (CanMove)
+        {
             HandleJump();
-        //Grounded = player.Rigidbody.velocity.y ==0;
+            HandleDash();
+        }
         if (player.Rigidbody.velocity.y < -1 && player.Rigidbody.velocity.y > -2)
         {
             IsFalling = true;
@@ -140,6 +141,14 @@ public class PlayerMovementController : MonoBehaviour
             toRotationVisual.x = 0;
             toRotationVisual.z=0;
             player.PlayerVisualController.transform.rotation = Quaternion.RotateTowards(player.PlayerVisualController.transform.rotation, toRotationVisual, 720 * Time.deltaTime);
+        }
+    }
+
+    private void HandleDash()
+    {
+        if (_inputService.DashButtonPressed())
+        {
+            _playerMovementService.Dash(player,20,0);
         }
     }
 

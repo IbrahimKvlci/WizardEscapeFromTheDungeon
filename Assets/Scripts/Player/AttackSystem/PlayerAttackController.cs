@@ -7,24 +7,26 @@ public class PlayerAttackController : MonoBehaviour
 {
     public event EventHandler OnAttack;
 
+    [field:Header("References")]
+    private IInputService _inputService;
+    [SerializeField] private Player player;
+    [field: SerializeField] private List<MagicBase> magicList;
+    private List<float> magicFreezeTimerList;
+    public List<Enemy> TargetEnemyList { get; set; }
+    [SerializeField] private Transform magicFireLoc;
+    public Enemy TargetEnemy { get; set; }
+    public MagicBase Magic { get; set; }
+
+
+    [field:Header("AttackSettings")]
     [field: SerializeField] public float Damage;
     [field: SerializeField] public float AttackTimerMax;
     [field: SerializeField] public float AttackFreezeTimerMax;
 
-    [SerializeField] private Transform magicFireLoc;
-    [SerializeField] private Player player;
-
-    public List<Enemy> TargetEnemyList { get; set; }
-    public Enemy TargetEnemy { get; set; }
+    [field:Header("Index")]
     private int targetEnemyIndex;
-
-
-    [field: SerializeField] private List<MagicBase> magicList;
-    public MagicBase Magic { get; set; }
     private int magicIndex;
-    private List<float> magicFreezeTimerList;
 
-    private IInputService _inputService;
 
 
     private void Awake()

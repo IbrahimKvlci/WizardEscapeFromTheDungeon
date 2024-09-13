@@ -16,3 +16,4 @@ MonoBehaviour:
   prefab: {fileID: 5180741983354471167, guid: 748b4c0335704c94cab15cc1897b5908, type: 3}
   HitParticle: {fileID: 2371035659270118654, guid: 3d5b84122a8f6ba48936b9aa1ff39072,
     type: 3}
+  freezeTimerMax: 5
