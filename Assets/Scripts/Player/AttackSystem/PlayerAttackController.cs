@@ -21,23 +21,30 @@ public class PlayerAttackController : MonoBehaviour
 
     [field: SerializeField] private List<MagicBase> magicList;
     public MagicBase Magic { get; set; }
-    private int magicIndex; 
+    private int magicIndex;
+    private List<float> magicFreezeTimerList;
 
     private IInputService _inputService;
 
-    private float attackFreezeTimer;
 
     private void Awake()
     {
-        _inputService=InGameIoC.Instance.InputService;
+        _inputService = InGameIoC.Instance.InputService;
         TargetEnemyList = new List<Enemy>();
+        magicFreezeTimerList = new List<float>();
+
+        #region CreateFreezeTimers
+        for (int i = 0; i < magicList.Count; i++)
+        {
+            magicFreezeTimerList.Add(magicList[i].MagicSO.freezeTimerMax);
+        }
+        #endregion
     }
 
     private void Start()
     {
         _inputService.OnSwitchMagicPressed += _inputService_OnSwitchMagicPressed;
 
-        attackFreezeTimer = 0;
         targetEnemyIndex = 0;
         magicIndex = 0;
         Magic = magicList[magicIndex];
@@ -53,31 +60,34 @@ public class PlayerAttackController : MonoBehaviour
     private void Update()
     {
         #region AttackTimer
-        if ( attackFreezeTimer >= AttackFreezeTimerMax)
+        if (magicFreezeTimerList[magicIndex] >= Magic.MagicSO.freezeTimerMax)
         {
             if (_inputService.FireButtonPressed())
             {
-                if (TargetEnemyList.Count>0)
+                if (TargetEnemyList.Count > 0)
                 {
                     StartCoroutine(Attack(TargetEnemy));
                 }
             }
         }
-        else
+        for (int i = 0; i < magicFreezeTimerList.Count; i++)
         {
-            attackFreezeTimer += Time.deltaTime;
+            if (magicFreezeTimerList[i] <= magicList[i].MagicSO.freezeTimerMax)
+            {
+                magicFreezeTimerList[i] += Time.deltaTime;
+            }
         }
         #endregion
 
         #region SetTargetEnemy
-        if (TargetEnemyList.Count==0)
+        if (TargetEnemyList.Count == 0)
         {
             targetEnemyIndex = 0;
-            TargetEnemy= null;
+            TargetEnemy = null;
         }
         else
         {
-            TargetEnemy=TargetEnemyList[targetEnemyIndex];
+            TargetEnemy = TargetEnemyList[targetEnemyIndex];
         }
         #endregion
     }
@@ -89,11 +99,11 @@ public class PlayerAttackController : MonoBehaviour
 
         player.PlayerMovementController.CanMove = false;
 
-        MagicBase magicBase = Instantiate(Magic.MagicSO.prefab,magicFireLoc.transform.position,Quaternion.identity).GetComponent<MagicBase>();
+        MagicBase magicBase = Instantiate(Magic.MagicSO.prefab, magicFireLoc.transform.position, Quaternion.identity).GetComponent<MagicBase>();
         magicBase.TargetEnemy = enemy;
         magicBase.MagicTimerMax = AttackTimerMax;
 
-        attackFreezeTimer = 0;
+        magicFreezeTimerList[magicIndex] = 0;
         yield return new WaitForSeconds(AttackTimerMax);
         enemy.EnemyHealth.TakeDamage(Damage);
         player.PlayerMovementController.CanMove = true;
