@@ -20,6 +20,9 @@ public class Dashing : MonoBehaviour
     [SerializeField] private float dashTimerMax;
     private float dashTimer;
 
+    [field: Header("Porperties")]
+    public bool IsDashing { get; set; }
+
 
     private void Awake()
     {
@@ -30,6 +33,7 @@ public class Dashing : MonoBehaviour
     private void Start()
     {
         dashTimer = dashTimerMax;
+        IsDashing = false;  
     }
 
     private void Update()
@@ -51,6 +55,7 @@ public class Dashing : MonoBehaviour
 
     private void Dash()
     {
+        IsDashing = true;
         Vector3 forceToApply=orientation.forward*dashForce+orientation.up*dashUpwardForce;
         rb.AddForce(forceToApply,ForceMode.Impulse);
 
@@ -60,5 +65,6 @@ public class Dashing : MonoBehaviour
     private void ResetDash()
     {
         rb.velocity = Vector3.zero;
+        IsDashing=false;
     }
 }
