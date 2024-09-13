@@ -30,12 +30,4 @@ public class PlayerMovementManager : IPlayerMovementService
         player.PlayerMovementController.IsRunning = moveVector != Vector3.zero;
     }
 
-    public void Dash(Player player,float dashForce,float dashUpwardForce)
-    {
-        Vector3 forceToApply = player.transform.forward * dashForce + player.transform.up * dashUpwardForce;
-
-        player.Rigidbody.velocity = Vector3.zero;
-        player.Rigidbody.AddForce(forceToApply, ForceMode.Impulse);
-    }
-
 }

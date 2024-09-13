@@ -99,7 +99,6 @@ public class PlayerMovementController : MonoBehaviour
         if (CanMove)
         {
             HandleJump();
-            HandleDash();
         }
         if (player.Rigidbody.velocity.y < -1 && player.Rigidbody.velocity.y > -2)
         {
@@ -141,14 +140,6 @@ public class PlayerMovementController : MonoBehaviour
             toRotationVisual.x = 0;
             toRotationVisual.z=0;
             player.PlayerVisualController.transform.rotation = Quaternion.RotateTowards(player.PlayerVisualController.transform.rotation, toRotationVisual, 720 * Time.deltaTime);
-        }
-    }
-
-    private void HandleDash()
-    {
-        if (_inputService.DashButtonPressed())
-        {
-            _playerMovementService.Dash(player,20,0);
         }
     }
 
