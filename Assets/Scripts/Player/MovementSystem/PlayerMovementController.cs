@@ -64,6 +64,7 @@ public class PlayerMovementController : MonoBehaviour
 
     Vector3 previousPos, lastMoveDirection;
     public bool CanMove { get; set; }
+    public bool IsMoving { get; set; }
 
 
     private void Awake()
@@ -78,6 +79,7 @@ public class PlayerMovementController : MonoBehaviour
         IsRunning = false;
         IsFalling = false;
         CanMove = true;
+        IsMoving = false;
     }
 
     private void FixedUpdate()
@@ -111,6 +113,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (_inputService.CheckJumpButton() && player.PlayerMovementController.Grounded)
         {
+            IsMoving = true;
             _playerMovementService.Jump(player);
             Grounded= false;
             OnJump?.Invoke(this,EventArgs.Empty);
@@ -147,6 +150,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         Grounded=true;
         IsFalling=false;
+        IsMoving=false;
         Debug.Log("fal");
     }
 

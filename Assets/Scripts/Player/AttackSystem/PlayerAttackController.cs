@@ -22,6 +22,8 @@ public class PlayerAttackController : MonoBehaviour
     [field: SerializeField] public float Damage;
     [field: SerializeField] public float AttackTimerMax;
     [field: SerializeField] public float AttackFreezeTimerMax;
+    public bool CanAttack { get; set; }
+    public bool IsAttacking { get; set; }
 
     [field:Header("Index")]
     private int targetEnemyIndex;
@@ -50,6 +52,7 @@ public class PlayerAttackController : MonoBehaviour
         targetEnemyIndex = 0;
         magicIndex = 0;
         Magic = magicList[magicIndex];
+        CanAttack = true;
     }
 
     private void _inputService_OnSwitchMagicPressed(object sender, IInputService.OnSwitchMagicPressedEventArgs e)
@@ -61,25 +64,28 @@ public class PlayerAttackController : MonoBehaviour
 
     private void Update()
     {
-        #region AttackTimer
-        if (magicFreezeTimerList[magicIndex] >= Magic.MagicSO.freezeTimerMax)
+        if (CanAttack)
         {
-            if (_inputService.FireButtonPressed())
+            #region AttackTimer
+            if (magicFreezeTimerList[magicIndex] >= Magic.MagicSO.freezeTimerMax)
             {
-                if (TargetEnemyList.Count > 0)
+                if (_inputService.FireButtonPressed())
                 {
-                    StartCoroutine(Attack(TargetEnemy));
+                    if (TargetEnemyList.Count > 0)
+                    {
+                        StartCoroutine(Attack(TargetEnemy));
+                    }
                 }
             }
-        }
-        for (int i = 0; i < magicFreezeTimerList.Count; i++)
-        {
-            if (magicFreezeTimerList[i] <= magicList[i].MagicSO.freezeTimerMax)
+            for (int i = 0; i < magicFreezeTimerList.Count; i++)
             {
-                magicFreezeTimerList[i] += Time.deltaTime;
+                if (magicFreezeTimerList[i] <= magicList[i].MagicSO.freezeTimerMax)
+                {
+                    magicFreezeTimerList[i] += Time.deltaTime;
+                }
             }
+            #endregion
         }
-        #endregion
 
         #region SetTargetEnemy
         if (TargetEnemyList.Count == 0)
@@ -96,7 +102,7 @@ public class PlayerAttackController : MonoBehaviour
 
     public IEnumerator Attack(Enemy enemy)
     {
-
+        IsAttacking = true;
         OnAttack?.Invoke(this, EventArgs.Empty);
 
         player.PlayerMovementController.CanMove = false;
@@ -110,6 +116,6 @@ public class PlayerAttackController : MonoBehaviour
         enemy.EnemyHealth.TakeDamage(Damage);
         player.PlayerMovementController.CanMove = true;
         Debug.Log("Attacked" + enemy.name);
-
+        IsAttacking = false;
     }
 }

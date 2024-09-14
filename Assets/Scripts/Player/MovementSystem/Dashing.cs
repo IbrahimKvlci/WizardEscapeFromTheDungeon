@@ -42,7 +42,7 @@ public class Dashing : MonoBehaviour
         {
             if (_inputService.DashButtonPressed() && player.PlayerMovementController.CanMove)
             {
-                Dash();
+                StartCoroutine(Dash());
                 dashTimer = 0;
             }
         }
@@ -53,18 +53,23 @@ public class Dashing : MonoBehaviour
         
     }
 
-    private void Dash()
+    private IEnumerator Dash()
     {
         IsDashing = true;
+        player.IsStunned = true;
         Vector3 forceToApply=orientation.forward*dashForce+orientation.up*dashUpwardForce;
         rb.AddForce(forceToApply,ForceMode.Impulse);
 
-        Invoke(nameof(ResetDash), dashDuration);
+        yield return new WaitForSeconds(dashDuration);
+        ResetDash();
+        yield return new WaitForSeconds(1);
+        player.IsStunned = false;
     }
 
     private void ResetDash()
     {
         rb.velocity = Vector3.zero;
         IsDashing=false;
+
     }
 }

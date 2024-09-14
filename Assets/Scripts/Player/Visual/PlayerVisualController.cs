@@ -13,6 +13,7 @@ public class PlayerVisualController : MonoBehaviour
         JumpStartTrigger,
         IsDowning,
         AttackTrigger,
+        IsStunned,
     }
 
     private void Start()
@@ -22,7 +23,13 @@ public class PlayerVisualController : MonoBehaviour
         player.PlayerMovementController.OnJump += PlayerMovementController_OnJump;
         player.PlayerMovementController.OnFallingChanged += PlayerMovementController_OnFallingChanged;
         player.PlayerAttackController.OnAttack += PlayerAttackController_OnAttack;
+        player.OnStunChanged += Player_OnStunChanged;
 
+    }
+
+    private void Player_OnStunChanged(object sender, System.EventArgs e)
+    {
+        SetAnimationBool(AnimationEnum.IsStunned, player.IsStunned);
     }
 
     private void PlayerAttackController_OnAttack(object sender, System.EventArgs e)
@@ -52,6 +59,8 @@ public class PlayerVisualController : MonoBehaviour
         player.PlayerMovementController.OnGroundedChanged -= PlayerMovementController_OnGroundedChanged;
         player.PlayerMovementController.OnJump -= PlayerMovementController_OnJump;
         player.PlayerMovementController.OnFallingChanged -= PlayerMovementController_OnFallingChanged;
+        player.OnStunChanged -= Player_OnStunChanged;
+
     }
 
     private void PlayerMovementController_OnRunningChanged(object sender, System.EventArgs e)

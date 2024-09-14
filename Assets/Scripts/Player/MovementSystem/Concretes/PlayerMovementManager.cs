@@ -28,6 +28,8 @@ public class PlayerMovementManager : IPlayerMovementService
         player.transform.Translate(moveVector * Time.deltaTime * player.PlayerMovementController.Speed);
 
         player.PlayerMovementController.IsRunning = moveVector != Vector3.zero;
+        player.PlayerMovementController.IsMoving = moveVector != Vector3.zero;
+
     }
 
 }
