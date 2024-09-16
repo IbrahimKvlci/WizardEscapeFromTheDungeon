@@ -21,8 +21,9 @@ public class GuardEnemy : Enemy
         Stand,
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         switch (EnemyIdle)
         {
             case EnemyIdleEnum.Sleep:
@@ -40,7 +41,12 @@ public class GuardEnemy : Enemy
     private void IdleSleep()
     {
         Debug.Log("Sleeping");
+        if (!IsSleeping)
+        {
+            IdleEnemyAction = IdleStand;
+        }
     }
+    
     private void IdleStand()
     {
         Debug.Log("Stay Stand");

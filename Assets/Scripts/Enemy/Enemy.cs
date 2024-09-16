@@ -5,38 +5,41 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    protected Action IdleEnemyAction;
 
+    public Action IdleEnemyAction {  get; set; }
+
+    [field:SerializeField] public EnemySO EnemySO {  get; private set; }
     [field: SerializeField] public EnemyHealth EnemyHealth {  get; set; }
+    [field:SerializeField] public EnemyAttackController EnemyAttackController { get; set; }
+    [field: SerializeField] public EnemyMovementController EnemyMovementController { get; set; }
 
-    public EnemyStateEnum State { get; set; }
-    public enum EnemyStateEnum
+    public IEnemyState EnemyIdleState { get; set; }
+    public IEnemyState EnemyChaseState { get; set; }
+    public IEnemyState EnemyAimState { get; set; }
+    public IEnemyState EnemyAttackState { get; set; }
+
+    private IEnemyStateService _enemyStateService;
+
+    protected virtual void Awake()
     {
-        Idle,
-        AttackPlayer,
+        _enemyStateService = new EnemyStateManager();
+
+        
+
     }
 
     private void Start()
     {
-        State=EnemyStateEnum.Idle;
+        EnemyIdleState = new EnemyIdleState(this, _enemyStateService);
+        EnemyChaseState = new EnemyChasePlayerState(this, _enemyStateService);
+        EnemyAimState = new EnemyAimState(this, _enemyStateService);
+        EnemyAttackState = new EnemyAttackState(this, _enemyStateService);
+        _enemyStateService.Initialize(EnemyIdleState);
     }
 
     private void Update()
     {
-        StateHandler();
+        _enemyStateService.CurrentEnemyState.UpdateState();
     }
 
-    private void StateHandler()
-    {
-        switch (State)
-        {
-            case EnemyStateEnum.Idle:
-                IdleEnemyAction();
-                break;
-            case EnemyStateEnum.AttackPlayer:
-                break;
-            default:
-                break;
-        }
-    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAttackController : MonoBehaviour
 {
-    public bool CanAttack { get; set; }
+    public bool CanAttack { get; set; } = true;
 
 
 }
