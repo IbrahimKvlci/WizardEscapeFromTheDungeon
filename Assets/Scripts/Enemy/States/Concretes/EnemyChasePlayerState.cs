@@ -20,6 +20,10 @@ public class EnemyChasePlayerState : EnemyStateBase
     {
         base.UpdateState();
         _enemy.EnemyMovementController.HandleMovementToThePlayer();
+        if (_enemy.EnemyTriggerController.IsPlayerTriggeredToBePreparedForAttack())
+        {
+            _enemyStateService.SwitchState(_enemy.EnemyAimState);
+        }
     }
 
     public override void ExitState()

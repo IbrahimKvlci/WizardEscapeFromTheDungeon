@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     [field: SerializeField] public EnemyHealth EnemyHealth {  get; set; }
     [field:SerializeField] public EnemyAttackController EnemyAttackController { get; set; }
     [field: SerializeField] public EnemyMovementController EnemyMovementController { get; set; }
+    [field: SerializeField] public EnemyTriggerController EnemyTriggerController { get; set; }
 
     public IEnemyState EnemyIdleState { get; set; }
     public IEnemyState EnemyChaseState { get; set; }

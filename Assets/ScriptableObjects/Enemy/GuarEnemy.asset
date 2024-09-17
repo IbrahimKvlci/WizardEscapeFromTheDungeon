@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: GuarEnemy
   m_EditorClassIdentifier: 
   enemySpeed: 3
+  enemyAttackRange: 1.5
+  enemyAimAttackTimerMax: 0
+  enemyAttackTimerMax: 0
