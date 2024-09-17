@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -189,6 +189,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1775920539986246929, guid: e91b8795992c26d4980fff541991b070,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2525924050847176012, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_Name
@@ -212,12 +217,12 @@ PrefabInstance:
     - target: {fileID: 3290193163023070331, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000017622675
+      value: -0.000000017622678
       objectReference: {fileID: 0}
     - target: {fileID: 3290193163023070331, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000002001138
+      value: 0.0000000020011384
       objectReference: {fileID: 0}
     - target: {fileID: 4632542111608105992, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
@@ -232,12 +237,12 @@ PrefabInstance:
     - target: {fileID: 4632542111608105992, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000017014704
+      value: -0.000000017014704
       objectReference: {fileID: 0}
     - target: {fileID: 4632542111608105992, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000002561138
+      value: 0.000000002561138
       objectReference: {fileID: 0}
     - target: {fileID: 5650911146005108638, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
@@ -1908,6 +1913,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.026289085
+      objectReference: {fileID: 0}
+    - target: {fileID: 6792223412218048829, guid: e91b8795992c26d4980fff541991b070,
+        type: 3}
+      propertyPath: <PlayerHeight>k__BackingField
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6792223412218048829, guid: e91b8795992c26d4980fff541991b070,
+        type: 3}
+      propertyPath: <PlayerRadius>k__BackingField
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6947752975206959010, guid: e91b8795992c26d4980fff541991b070,
         type: 3}

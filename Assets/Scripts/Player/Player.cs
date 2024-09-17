@@ -7,12 +7,14 @@ public class Player : MonoBehaviour
 {
     public event EventHandler OnStunChanged;
 
+    [field:Header("References")]
     [field: SerializeField] public PlayerMovementController PlayerMovementController { get; set; }
     [field: SerializeField] public Rigidbody Rigidbody { get; set; }
     [field: SerializeField] public PlayerVisualController PlayerVisualController { get; set; }
     [field: SerializeField] public PlayerAttackController PlayerAttackController { get; set; }
     [field: SerializeField] public Dashing Dashing { get; set; }
 
+    [field: Header("Settings")]
     private bool _isStunned;
     public bool IsStunned
     {
@@ -23,10 +25,12 @@ public class Player : MonoBehaviour
         set
         {
             _isStunned = value;
+            SetStunPlayer(!_isStunned);
             OnStunChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
+    [field:Header("States")]
     public IPlayerState PlayerIdleState { get; set; }
     public IPlayerState PlayerRunningState { get; set; }
     public IPlayerState PlayerAirborneState { get; set; }
@@ -75,28 +79,12 @@ public class Player : MonoBehaviour
         //{
         //    State = PlayerStateEnum.Dashing;
         //}
-
-        #region StunHandle
-        if (IsStunned)
-        {
-            StunPlayer();
-        }
-        else
-        {
-            ClearStun();
-        }
-
-        #endregion
     }
 
-    private void StunPlayer()
+    private void SetStunPlayer(bool value)
     {
-        PlayerMovementController.CanMove = false;
-        PlayerAttackController.CanAttack = false;
+        PlayerMovementController.CanMove = value;
+        PlayerAttackController.CanAttack = value;
     }
-    private void ClearStun()
-    {
-        PlayerMovementController.CanMove = true;
-        PlayerAttackController.CanAttack = true;
-    }
+
 }

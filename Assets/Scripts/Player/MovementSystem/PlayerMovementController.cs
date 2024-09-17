@@ -62,7 +62,8 @@ public class PlayerMovementController : MonoBehaviour
     }
 
 
-    Vector3 previousPos, lastMoveDirection;
+    Vector3 previousPos;
+    public Vector3 LastMoveDirection { get; set; }
     public bool CanMove { get; set; }
     public bool IsMoving { get; set; }
 
@@ -135,11 +136,11 @@ public class PlayerMovementController : MonoBehaviour
             //Rotate Player Visual
             if (player.transform.position != previousPos)
             {
-                lastMoveDirection = (player.transform.position - previousPos).normalized;
+                LastMoveDirection = (player.transform.position - previousPos).normalized;
                 previousPos = player.transform.position;
             }
 
-            Quaternion toRotationVisual = Quaternion.LookRotation(lastMoveDirection, Vector3.up);
+            Quaternion toRotationVisual = Quaternion.LookRotation(LastMoveDirection, Vector3.up);
             toRotationVisual.x = 0;
             toRotationVisual.z=0;
             player.PlayerVisualController.transform.rotation = Quaternion.RotateTowards(player.PlayerVisualController.transform.rotation, toRotationVisual, 720 * Time.deltaTime);

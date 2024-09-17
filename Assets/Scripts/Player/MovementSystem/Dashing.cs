@@ -40,7 +40,7 @@ public class Dashing : MonoBehaviour
     {
         if (dashTimer >= dashTimerMax)
         {
-            if (_inputService.DashButtonPressed() && player.PlayerMovementController.CanMove)
+            if (_inputService.DashButtonPressed() && player.PlayerMovementController.CanMove&&!Physics.Raycast(player.transform.position+Vector3.up,orientation.forward,1f))
             {
                 StartCoroutine(Dash());
                 dashTimer = 0;
@@ -50,7 +50,15 @@ public class Dashing : MonoBehaviour
         {
             dashTimer += Time.deltaTime;
         }
-        
+
+        if (IsDashing)
+        {
+            if (Physics.Raycast(player.transform.position + Vector3.up, orientation.forward, 0.5f))
+            {
+                ResetDash();
+                Debug.Log("a");
+            }
+        }
     }
 
     private IEnumerator Dash()
@@ -59,7 +67,6 @@ public class Dashing : MonoBehaviour
         player.IsStunned = true;
         Vector3 forceToApply=orientation.forward*dashForce+orientation.up*dashUpwardForce;
         rb.AddForce(forceToApply,ForceMode.Impulse);
-
         yield return new WaitForSeconds(dashDuration);
         ResetDash();
         yield return new WaitForSeconds(1);
