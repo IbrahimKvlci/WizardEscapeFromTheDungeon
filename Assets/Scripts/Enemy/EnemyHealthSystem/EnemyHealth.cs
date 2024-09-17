@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [SerializeField] private Enemy enemy;
+
     public float Health { get; set; }
+    public bool IsDead { get; set; }
 
     public void TakeDamage(float damage)
     {
         Health -= damage;
         if(Health <= 0)
         {
-            DestroySelf();
+            IsDead = true;
         }
     }
 
-    private void DestroySelf()
+    public void DestroySelf()
     {
-        Debug.Log("Dead");
+        Destroy(enemy.gameObject);
     }
 }

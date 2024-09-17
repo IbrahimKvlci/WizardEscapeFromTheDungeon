@@ -23,5 +23,9 @@ public class EnemyStateBase : IEnemyState
 
     public virtual void UpdateState()
     {
+        if (_enemy.EnemyHealth.IsDead&&_enemyStateService.CurrentEnemyState is not EnemyDeathState)
+        {
+            _enemyStateService.SwitchState(_enemy.EnemyDeathState);
+        }
     }
 }

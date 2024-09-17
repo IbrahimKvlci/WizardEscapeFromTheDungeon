@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     public IEnemyState EnemyChaseState { get; set; }
     public IEnemyState EnemyAimState { get; set; }
     public IEnemyState EnemyAttackState { get; set; }
+    public IEnemyState EnemyDeathState {  get; set; }
+
 
     private IEnemyStateService _enemyStateService;
 
@@ -30,7 +32,7 @@ public class Enemy : MonoBehaviour
         EnemyChaseState = new EnemyChasePlayerState(this, _enemyStateService);
         EnemyAimState = new EnemyAimState(this, _enemyStateService);
         EnemyAttackState = new EnemyAttackState(this, _enemyStateService);
-
+        EnemyDeathState=new EnemyDeathState(this, _enemyStateService);
     }
 
     private void Start()

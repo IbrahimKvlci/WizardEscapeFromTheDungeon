@@ -12,15 +12,22 @@ public class GuardEnemyVisual : MonoBehaviour
         IsSleeping,
         IsRunning,
         AttackTrigger,
+        IsDead,
     }
 
     private void Start()
     {
         enemy.OnSleepingChanged += Enemy_OnSleepingChanged;
         ((EnemyAttackState)enemy.EnemyAttackState).OnAttackStarted += GuardEnemyVisual_OnAttack;
+        ((EnemyDeathState)enemy.EnemyDeathState).OnEnemyDead += GuardEnemyVisual_OnEnemyDead;
         enemy.EnemyMovementController.OnEnemyMovementChanged += EnemyMovementController_OnEnemyMovementChanged;
 
         SetBool(GuardEnemyAnimationEnum.IsSleeping, enemy.IsSleeping);
+    }
+
+    private void GuardEnemyVisual_OnEnemyDead(object sender, System.EventArgs e)
+    {
+        SetBool(GuardEnemyAnimationEnum.IsDead, true);
     }
 
     private void EnemyMovementController_OnEnemyMovementChanged(object sender, System.EventArgs e)
@@ -37,6 +44,7 @@ public class GuardEnemyVisual : MonoBehaviour
     {
         enemy.OnSleepingChanged -= Enemy_OnSleepingChanged;
         ((EnemyAttackState)enemy.EnemyAttackState).OnAttackStarted -= GuardEnemyVisual_OnAttack;
+        ((EnemyDeathState)enemy.EnemyDeathState).OnEnemyDead -= GuardEnemyVisual_OnEnemyDead;
         enemy.EnemyMovementController.OnEnemyMovementChanged -= EnemyMovementController_OnEnemyMovementChanged;
 
     }
