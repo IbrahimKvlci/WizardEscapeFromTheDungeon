@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpeed: 3
   enemyAttackRange: 1.5
-  enemyAimAttackTimerMax: 0
-  enemyAttackTimerMax: 0
+  enemyAimAttackTimerMax: 2
+  enemyAttackTimerMax: 2

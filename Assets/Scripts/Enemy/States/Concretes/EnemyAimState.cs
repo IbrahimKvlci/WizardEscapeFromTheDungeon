@@ -16,7 +16,7 @@ public class EnemyAimState : EnemyStateBase
     public override void UpdateState()
     {
         base.UpdateState();
-        if (_enemy.EnemyTriggerController.IsPlayerTriggeredToBePreparedForAttack())
+        if (!_enemy.EnemyTriggerController.IsPlayerTriggeredToBePreparedForAttack())
         {
             _enemyStateService.SwitchState(_enemy.EnemyChaseState);
         }
@@ -32,6 +32,9 @@ public class EnemyAimState : EnemyStateBase
         {
             timer += Time.deltaTime;
         }
+
+        Vector3 enemyForwardVector = Player.Instance.transform.position-_enemy.transform.position;
+        _enemy.transform.forward = Vector3.Slerp(_enemy.transform.forward,enemyForwardVector,0.05f);
     }
     public override void ExitState()
     {

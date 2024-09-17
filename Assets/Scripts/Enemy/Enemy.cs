@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     [field: SerializeField] public EnemyMovementController EnemyMovementController { get; set; }
     [field: SerializeField] public EnemyTriggerController EnemyTriggerController { get; set; }
 
+
     public IEnemyState EnemyIdleState { get; set; }
     public IEnemyState EnemyChaseState { get; set; }
     public IEnemyState EnemyAimState { get; set; }
@@ -25,16 +26,16 @@ public class Enemy : MonoBehaviour
     {
         _enemyStateService = new EnemyStateManager();
 
-        
+        EnemyIdleState = new EnemyIdleState(this, _enemyStateService);
+        EnemyChaseState = new EnemyChasePlayerState(this, _enemyStateService);
+        EnemyAimState = new EnemyAimState(this, _enemyStateService);
+        EnemyAttackState = new EnemyAttackState(this, _enemyStateService);
 
     }
 
     private void Start()
     {
-        EnemyIdleState = new EnemyIdleState(this, _enemyStateService);
-        EnemyChaseState = new EnemyChasePlayerState(this, _enemyStateService);
-        EnemyAimState = new EnemyAimState(this, _enemyStateService);
-        EnemyAttackState = new EnemyAttackState(this, _enemyStateService);
+
         _enemyStateService.Initialize(EnemyIdleState);
     }
 

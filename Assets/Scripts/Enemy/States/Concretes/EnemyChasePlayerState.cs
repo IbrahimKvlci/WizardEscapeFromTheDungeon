@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyChasePlayerState : EnemyStateBase
-{ 
+{
 
     public EnemyChasePlayerState(Enemy enemy, IEnemyStateService enemyStateService) : base(enemy, enemyStateService)
     {

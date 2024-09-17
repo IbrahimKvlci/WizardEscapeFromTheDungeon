@@ -6,6 +6,7 @@ public class EnemyTriggerController : MonoBehaviour
 {
     [SerializeField] private Enemy enemy;
     [SerializeField] private LayerMask layerMask;
+    [field:SerializeField] public EnemyTriggerDetector EnemyTriggerDetector {  get; private set; }
 
     public bool IsPlayerTriggeredToBePreparedForAttack()
     {

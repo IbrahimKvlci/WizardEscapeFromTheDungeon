@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,12 @@ using UnityEngine.AI;
 
 public class EnemyMovementController : MonoBehaviour
 {
+    public event EventHandler OnEnemyMovementChanged;
+
     [SerializeField] private Enemy enemy;
     [SerializeField] private NavMeshAgent navMeshAgent;
 
     public bool CanMove { get; set; }
-
-
 
     public void HandleMovementToThePlayer()
     {
@@ -22,5 +23,7 @@ public class EnemyMovementController : MonoBehaviour
         CanMove = canMove;
         navMeshAgent.isStopped = !canMove;
         navMeshAgent.ResetPath();
+
+        OnEnemyMovementChanged?.Invoke(this, EventArgs.Empty);
     }
 }

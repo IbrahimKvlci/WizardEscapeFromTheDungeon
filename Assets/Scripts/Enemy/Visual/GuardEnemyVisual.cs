@@ -10,18 +10,34 @@ public class GuardEnemyVisual : MonoBehaviour
     enum GuardEnemyAnimationEnum
     {
         IsSleeping,
+        IsRunning,
+        AttackTrigger,
     }
 
     private void Start()
     {
         enemy.OnSleepingChanged += Enemy_OnSleepingChanged;
+        ((EnemyAttackState)enemy.EnemyAttackState).OnAttackStarted += GuardEnemyVisual_OnAttack;
+        enemy.EnemyMovementController.OnEnemyMovementChanged += EnemyMovementController_OnEnemyMovementChanged;
 
         SetBool(GuardEnemyAnimationEnum.IsSleeping, enemy.IsSleeping);
+    }
+
+    private void EnemyMovementController_OnEnemyMovementChanged(object sender, System.EventArgs e)
+    {
+        SetBool(GuardEnemyAnimationEnum.IsRunning, enemy.EnemyMovementController.CanMove);
+    }
+
+    private void GuardEnemyVisual_OnAttack(object sender, System.EventArgs e)
+    {
+        TriggerAnimation(GuardEnemyAnimationEnum.AttackTrigger);
     }
 
     private void OnDisable()
     {
         enemy.OnSleepingChanged -= Enemy_OnSleepingChanged;
+        ((EnemyAttackState)enemy.EnemyAttackState).OnAttackStarted -= GuardEnemyVisual_OnAttack;
+        enemy.EnemyMovementController.OnEnemyMovementChanged -= EnemyMovementController_OnEnemyMovementChanged;
 
     }
 
@@ -33,5 +49,9 @@ public class GuardEnemyVisual : MonoBehaviour
     private void SetBool(GuardEnemyAnimationEnum guardEnemyAnimationEnum, bool value)
     {
         animator.SetBool(guardEnemyAnimationEnum.ToString(), value);
+    }
+    private void TriggerAnimation(GuardEnemyAnimationEnum guardEnemyAnimationEnum)
+    {
+        animator.SetTrigger(guardEnemyAnimationEnum.ToString());
     }
 }
