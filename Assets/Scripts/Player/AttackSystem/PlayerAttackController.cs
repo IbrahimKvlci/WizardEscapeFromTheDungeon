@@ -64,7 +64,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void Update()
     {
-        if (CanAttack)
+        if (CanAttack&&player.HasWand)
         {
             #region AttackTimer
             if (magicFreezeTimerList[magicIndex] >= Magic.MagicSO.freezeTimerMax)

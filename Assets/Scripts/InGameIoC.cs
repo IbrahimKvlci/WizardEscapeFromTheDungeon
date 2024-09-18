@@ -8,13 +8,13 @@ public class InGameIoC : MonoBehaviour
 
     public IInputService InputService { get; set; }
     public IPlayerMovementService PlayerMovementService { get; set; }
-    public IEnemyDetectService EnemyDetectService { get; set; }
+    public IObjectDetectService ObjectDetectService { get; set; }
 
     private void Awake()
     {
         Instance = this;
         InputService=InputManager.Instance;
         PlayerMovementService = new PlayerMovementManager(InputService);
-        EnemyDetectService = new EnemyDetectManager();
+        ObjectDetectService = new ObjectDetectManager();
     }
 }

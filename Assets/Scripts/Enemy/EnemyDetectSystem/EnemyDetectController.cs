@@ -6,11 +6,11 @@ public class EnemyDetectController : MonoBehaviour
 {
     [field: SerializeField] private Enemy enemy;
 
-    private IEnemyDetectService _enemyDetectService;
+    private IObjectDetectService _objectDetectService;
 
     private void Awake()
     {
-        _enemyDetectService = InGameIoC.Instance.EnemyDetectService;
+        _objectDetectService = InGameIoC.Instance.ObjectDetectService;
     }
 
     private void Update()
@@ -20,7 +20,7 @@ public class EnemyDetectController : MonoBehaviour
 
     private void HandleEnemyCameraDetect()
     {
-        if (_enemyDetectService.IsVisibleInCamera(Camera.main, enemy)&&!enemy.EnemyHealth.IsDead)
+        if (_objectDetectService.IsVisibleInCamera(Camera.main, enemy.gameObject)&&!enemy.EnemyHealth.IsDead)
         {
             if (!Player.Instance.PlayerAttackController.TargetEnemyList.Contains(enemy))
             {

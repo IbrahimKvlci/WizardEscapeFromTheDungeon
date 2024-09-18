@@ -14,6 +14,7 @@ public class PlayerVisualController : MonoBehaviour
         IsDowning,
         AttackTrigger,
         IsStunned,
+        IdleBlend,
     }
 
     private void Start()
@@ -24,7 +25,20 @@ public class PlayerVisualController : MonoBehaviour
         player.PlayerMovementController.OnFallingChanged += PlayerMovementController_OnFallingChanged;
         player.PlayerAttackController.OnAttack += PlayerAttackController_OnAttack;
         player.OnStunChanged += Player_OnStunChanged;
+        player.OnWandActiveChanged += Player_OnWandActiveChanged;
 
+    }
+
+    private void Player_OnWandActiveChanged(object sender, System.EventArgs e)
+    {
+        if (player.HasWand)
+        {
+            SetAnimationFloat(AnimationEnum.IdleBlend, 1);
+        }
+        else
+        {
+            SetAnimationFloat(AnimationEnum.IdleBlend, 0);
+        }
     }
 
     private void Player_OnStunChanged(object sender, System.EventArgs e)
@@ -60,6 +74,7 @@ public class PlayerVisualController : MonoBehaviour
         player.PlayerMovementController.OnJump -= PlayerMovementController_OnJump;
         player.PlayerMovementController.OnFallingChanged -= PlayerMovementController_OnFallingChanged;
         player.OnStunChanged -= Player_OnStunChanged;
+        player.OnWandActiveChanged -= Player_OnWandActiveChanged;
 
     }
 
@@ -79,5 +94,9 @@ public class PlayerVisualController : MonoBehaviour
     private void TriggerAnimationById(AnimationEnum animationEnum,int id)
     {
         animator.SetTrigger($"{animationEnum.ToString()}{id}");
+    }
+    private void SetAnimationFloat(AnimationEnum animationEnum,float value)
+    {
+        animator.SetFloat(animationEnum.ToString(), value);
     }
 }

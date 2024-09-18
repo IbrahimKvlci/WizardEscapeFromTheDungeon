@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public event EventHandler OnStunChanged;
+    public event EventHandler OnWandActiveChanged;
 
     [field:Header("References")]
     [field: SerializeField] public PlayerMovementController PlayerMovementController { get; set; }
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     [field: SerializeField] public PlayerVisualController PlayerVisualController { get; set; }
     [field: SerializeField] public PlayerAttackController PlayerAttackController { get; set; }
     [field: SerializeField] public Dashing Dashing { get; set; }
+    [field:SerializeField] public GameObject WandObject { get; set; }
 
     [field: Header("Settings")]
     private bool _isStunned;
@@ -27,6 +29,20 @@ public class Player : MonoBehaviour
             _isStunned = value;
             SetStunPlayer(!_isStunned);
             OnStunChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+    private bool _hasWand;
+    public bool HasWand
+    {
+        get
+        {
+            return _hasWand;
+        }
+        set
+        {
+            _hasWand = value;
+            WandObject.SetActive(value);
+            OnWandActiveChanged?.Invoke(this, EventArgs.Empty); 
         }
     }
 
@@ -62,23 +78,11 @@ public class Player : MonoBehaviour
     private void Start()
     {
         IsStunned = false;
+        HasWand = WandObject.activeSelf;
     }
 
     private void Update()
     {
-        ////Moving
-        //if (PlayerMovementController.IsMoving)
-        //{
-        //    State=PlayerStateEnum.Moving;
-        //}
-        //else if (PlayerAttackController.IsAttacking)
-        //{
-        //    State = PlayerStateEnum.Attacking;
-        //}
-        //else if (Dashing.IsDashing)
-        //{
-        //    State = PlayerStateEnum.Dashing;
-        //}
     }
 
     private void SetStunPlayer(bool value)
@@ -86,5 +90,4 @@ public class Player : MonoBehaviour
         PlayerMovementController.CanMove = value;
         PlayerAttackController.CanAttack = value;
     }
-
 }

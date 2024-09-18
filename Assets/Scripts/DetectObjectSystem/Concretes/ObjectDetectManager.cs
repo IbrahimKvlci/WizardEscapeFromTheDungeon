@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDetectManager : IEnemyDetectService
+public class ObjectDetectManager : IObjectDetectService
 {
-    public bool IsVisibleInCamera(Camera camera, Enemy enemy)
+    public bool IsVisibleInCamera(Camera camera, GameObject gameObject)
     {
         var planes=GeometryUtility.CalculateFrustumPlanes(camera);
-        var point=enemy.transform.position;
+        var point= gameObject.transform.position;
 
         foreach (var plane in planes)
         {
