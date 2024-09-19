@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface IHoldable
 {
-    
+    void Hold(Transform point);
+    void Drop();
 }
