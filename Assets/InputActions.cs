@@ -71,6 +71,24 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HoldObject"",
+                    ""type"": ""Button"",
+                    ""id"": ""946300ff-518f-4f6f-956f-9dfdf486bf5e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MovementOfHoldingObject"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""28811399-bfd4-4d13-a0cf-475f062ebd01"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -194,6 +212,28 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""feaf9c63-04fc-4d7a-9dc1-4f6a5edf14b1"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HoldObject"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2181b35e-cb3a-464c-a473-1f2e1280af10"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovementOfHoldingObject"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -207,6 +247,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_SwitchMagic = m_Player.FindAction("SwitchMagic", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_HoldObject = m_Player.FindAction("HoldObject", throwIfNotFound: true);
+        m_Player_MovementOfHoldingObject = m_Player.FindAction("MovementOfHoldingObject", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +315,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_SwitchMagic;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_HoldObject;
+    private readonly InputAction m_Player_MovementOfHoldingObject;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -282,6 +326,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @SwitchMagic => m_Wrapper.m_Player_SwitchMagic;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @HoldObject => m_Wrapper.m_Player_HoldObject;
+        public InputAction @MovementOfHoldingObject => m_Wrapper.m_Player_MovementOfHoldingObject;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -306,6 +352,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @HoldObject.started += instance.OnHoldObject;
+            @HoldObject.performed += instance.OnHoldObject;
+            @HoldObject.canceled += instance.OnHoldObject;
+            @MovementOfHoldingObject.started += instance.OnMovementOfHoldingObject;
+            @MovementOfHoldingObject.performed += instance.OnMovementOfHoldingObject;
+            @MovementOfHoldingObject.canceled += instance.OnMovementOfHoldingObject;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -325,6 +377,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @HoldObject.started -= instance.OnHoldObject;
+            @HoldObject.performed -= instance.OnHoldObject;
+            @HoldObject.canceled -= instance.OnHoldObject;
+            @MovementOfHoldingObject.started -= instance.OnMovementOfHoldingObject;
+            @MovementOfHoldingObject.performed -= instance.OnMovementOfHoldingObject;
+            @MovementOfHoldingObject.canceled -= instance.OnMovementOfHoldingObject;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -349,5 +407,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnSwitchMagic(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnHoldObject(InputAction.CallbackContext context);
+        void OnMovementOfHoldingObject(InputAction.CallbackContext context);
     }
 }

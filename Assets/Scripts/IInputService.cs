@@ -16,4 +16,9 @@ public interface IInputService
     bool FireButtonPressed();
     bool DashButtonPressed();
     int GetMagicIndex();
+    /// <summary>
+    /// It gives one of the three value (-1,0,1)
+    /// </summary>
+    /// <returns></returns>
+    int GetScrollYValueSign();
 }

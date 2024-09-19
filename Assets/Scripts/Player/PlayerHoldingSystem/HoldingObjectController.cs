@@ -11,6 +11,13 @@ public class HoldingObjectController : MonoBehaviour
     [SerializeField] private float moveHoldingObjectSpeedForwardBack;
     private bool firstFrameAfterHold;
 
+    private IInputService _inputService;
+
+    private void Awake()
+    {
+        _inputService=InGameIoC.Instance.InputService;
+    }
+
     private void Update()
     {
         firstFrameAfterHold = true;
@@ -43,11 +50,12 @@ public class HoldingObjectController : MonoBehaviour
 
         if(HoldingObject!= null)
         {
-            if (Input.GetKey(KeyCode.E)&&Mathf.Abs(Player.Instance.transform.position.z-holdPosTransform.position.z)<5)
+
+            if (_inputService.GetScrollYValueSign()>0&&Mathf.Abs(Player.Instance.transform.position.z-holdPosTransform.position.z)<5)
             {
                 holdPosTransform.Translate(new Vector3(0, 0, 1)*Time.deltaTime*moveHoldingObjectSpeedForwardBack);
             }
-            if (Input.GetKey(KeyCode.Q) && Mathf.Abs(Player.Instance.transform.position.z - holdPosTransform.position.z) > 0.5f)
+            if (_inputService.GetScrollYValueSign() < 0 && Mathf.Abs(Player.Instance.transform.position.z - holdPosTransform.position.z) > 0.5f)
             {
                 holdPosTransform.Translate(new Vector3(0, 0, -1)*Time.deltaTime*moveHoldingObjectSpeedForwardBack);
             }

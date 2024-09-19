@@ -51,4 +51,17 @@ public class InputManager :MonoBehaviour, IInputService
     {
         return inputActions.Player.Dash.WasPressedThisFrame();
     }
+
+    public int GetScrollYValueSign()
+    {
+        if(inputActions.Player.MovementOfHoldingObject.ReadValue<float>() > 0)
+        {
+            return 1;
+        }
+        else if (inputActions.Player.MovementOfHoldingObject.ReadValue<float>() < 0)
+        {
+            return -1;
+        }
+        return 0;
+    }
 }
