@@ -8,6 +8,7 @@ public class HoldingObjectController : MonoBehaviour
     public GameObject HoldingObject { get; private set; }
     [SerializeField] private LayerMask layer;
     [SerializeField] private Transform holdPosTransform;
+    [SerializeField] private float moveHoldingObjectSpeedForwardBack;
     private bool firstFrameAfterHold;
 
     private void Update()
@@ -37,6 +38,18 @@ public class HoldingObjectController : MonoBehaviour
             {
                 HoldingObject.GetComponent<IHoldable>().Drop();
                 HoldingObject = null;
+            }
+        }
+
+        if(HoldingObject!= null)
+        {
+            if (Input.GetKey(KeyCode.E)&&Mathf.Abs(Player.Instance.transform.position.z-holdPosTransform.position.z)<5)
+            {
+                holdPosTransform.Translate(new Vector3(0, 0, 1)*Time.deltaTime*moveHoldingObjectSpeedForwardBack);
+            }
+            if (Input.GetKey(KeyCode.Q) && Mathf.Abs(Player.Instance.transform.position.z - holdPosTransform.position.z) > 0.5f)
+            {
+                holdPosTransform.Translate(new Vector3(0, 0, -1)*Time.deltaTime*moveHoldingObjectSpeedForwardBack);
             }
         }
 
