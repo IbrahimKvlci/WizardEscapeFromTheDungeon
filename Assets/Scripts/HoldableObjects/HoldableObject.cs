@@ -6,11 +6,19 @@ public class HoldableObject :MonoBehaviour, IHoldable
 {
     [SerializeField] private Rigidbody rb;
     private Transform holdingPos;
+    [SerializeField] private Outline outline;
+
+
+    private void Start()
+    {
+        SetColor(Color.yellow);
+    }
 
     public void Drop()
     {
         holdingPos= null;
         rb.useGravity = true;
+        SetColor(Color.yellow);
     }
 
     public void Hold(Transform point)
@@ -19,6 +27,12 @@ public class HoldableObject :MonoBehaviour, IHoldable
         rb.isKinematic = false;
         rb.useGravity = false;
         transform.SetParent(null);
+        SetColor(Color.blue);
+    }
+
+    public void SetColor(Color color)
+    {
+        outline.OutlineColor= color;
     }
 
     private void FixedUpdate()
@@ -39,5 +53,6 @@ public class HoldableObject :MonoBehaviour, IHoldable
             }
         }
     }
+
 
 }

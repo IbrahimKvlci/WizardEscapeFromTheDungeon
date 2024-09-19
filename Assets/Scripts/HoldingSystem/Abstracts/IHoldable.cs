@@ -6,4 +6,6 @@ public interface IHoldable
 {
     void Hold(Transform point);
     void Drop();
+    void SetColor(Color color);
+
 }
