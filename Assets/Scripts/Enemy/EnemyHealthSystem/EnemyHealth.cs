@@ -20,6 +20,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void DestroySelf()
     {
+        enemy.DropHoldableObjectsOnEnemy();
         Destroy(enemy.gameObject);
     }
 }

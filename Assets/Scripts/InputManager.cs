@@ -64,4 +64,9 @@ public class InputManager :MonoBehaviour, IInputService
         }
         return 0;
     }
+
+    public bool HoldObjectButtonPressed()
+    {
+        return inputActions.Player.HoldObject.WasPressedThisFrame();
+    }
 }

@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     [field: SerializeField] public EnemyMovementController EnemyMovementController { get; set; }
     [field: SerializeField] public EnemyTriggerController EnemyTriggerController { get; set; }
 
+    [SerializeField] private List<HoldableObject> holdableObjectList;
+
 
     public IEnemyState EnemyIdleState { get; set; }
     public IEnemyState EnemyChaseState { get; set; }
@@ -44,6 +46,17 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         _enemyStateService.CurrentEnemyState.UpdateState();
+    }
+
+    public void DropHoldableObjectsOnEnemy()
+    {
+        if(holdableObjectList.Count > 0)
+        {
+            foreach (var holdableObject in holdableObjectList)
+            {
+                holdableObject.Drop();
+            }
+        }
     }
 
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -5,6 +6,9 @@ using UnityEngine;
 
 public class HoldingObjectController : MonoBehaviour
 {
+    public event EventHandler OnHoldingObject;
+    public event EventHandler OnDroppedObject;
+
     [field: Header("Settings")]
     [SerializeField] private LayerMask layer;
     [SerializeField] private float moveHoldingObjectSpeedForwardBack;
@@ -32,7 +36,7 @@ public class HoldingObjectController : MonoBehaviour
                 //Holdable Object Found
                 if (HoldingObject != hitInfo.transform.gameObject)
                     holdable.SetColor(Color.green);
-                if (Input.GetMouseButtonDown(1) && HoldingObject != hitInfo.transform.gameObject)
+                if (_inputService.HoldObjectButtonPressed() && HoldingObject != hitInfo.transform.gameObject)
                 {
                     if (HoldingObject != null)
                         HoldingObject.GetComponent<IHoldable>().Drop();
@@ -40,6 +44,8 @@ public class HoldingObjectController : MonoBehaviour
                     holdPosTransform.position = hitInfo.transform.position;
                     holdable.Hold(holdPosTransform);
                     firstFrameAfterHold = false;
+
+                    OnHoldingObject?.Invoke(this, EventArgs.Empty);
                 }
                 lastCastedHoldableObject = holdable;
             }
@@ -68,10 +74,12 @@ public class HoldingObjectController : MonoBehaviour
         #region DropHoldingObject
         if (HoldingObject != null && firstFrameAfterHold)
         {
-            if (Input.GetMouseButtonDown(1))
+            if (_inputService.HoldObjectButtonPressed())
             {
                 HoldingObject.GetComponent<IHoldable>().Drop();
                 HoldingObject = null;
+
+                OnDroppedObject?.Invoke(this, EventArgs.Empty);
             }
         }
         #endregion

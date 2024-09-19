@@ -15,6 +15,7 @@ public interface IInputService
     bool CheckJumpButton();
     bool FireButtonPressed();
     bool DashButtonPressed();
+    bool HoldObjectButtonPressed();
     int GetMagicIndex();
     /// <summary>
     /// It gives one of the three value (-1,0,1)

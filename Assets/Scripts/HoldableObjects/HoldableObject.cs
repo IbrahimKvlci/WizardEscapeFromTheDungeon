@@ -18,7 +18,9 @@ public class HoldableObject :MonoBehaviour, IHoldable
     {
         holdingPos= null;
         rb.useGravity = true;
+        rb.isKinematic = false;
         SetColor(Color.yellow);
+        transform.SetParent(null);
     }
 
     public void Hold(Transform point)
