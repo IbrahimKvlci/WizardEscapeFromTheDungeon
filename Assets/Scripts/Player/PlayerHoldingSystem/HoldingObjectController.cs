@@ -21,9 +21,23 @@ public class HoldingObjectController : MonoBehaviour
     private IHoldable lastCastedHoldableObject;
     private IInputService _inputService;
 
+    [field:Header("VisualReferences")]
+    [SerializeField] private Transform playerWithWandMagicStartingPos, playerWithoutWandMagicStartingPos;
+    [SerializeField] private GameObject holdingMagicParticle;
+    private GameObject magicTrailParticleObject;
+
+    [field: Header("VisualSettings")]
+    [SerializeField] private float visualTimerMax;
+    private float visualTimer;
+
     private void Awake()
     {
         _inputService = InGameIoC.Instance.InputService;
+    }
+
+    private void Start()
+    {
+        visualTimer = 0;
     }
 
     private void Update()
@@ -49,17 +63,17 @@ public class HoldingObjectController : MonoBehaviour
                 }
                 lastCastedHoldableObject = holdable;
             }
-            else if (lastCastedHoldableObject != null&&lastCastedHoldableObject!=HoldingObject.GetComponent<IHoldable>())
+            else if (lastCastedHoldableObject != null && lastCastedHoldableObject != HoldingObject.GetComponent<IHoldable>())
             {
                 lastCastedHoldableObject.SetColor(Color.yellow);
-                lastCastedHoldableObject=null;
+                lastCastedHoldableObject = null;
             }
         }
         else if (lastCastedHoldableObject != null)
         {
-            if(HoldingObject != null)
+            if (HoldingObject != null)
             {
-                if(HoldingObject.GetComponent<IHoldable>() != lastCastedHoldableObject)
+                if (HoldingObject.GetComponent<IHoldable>() != lastCastedHoldableObject)
                 {
                     lastCastedHoldableObject.SetColor(Color.yellow);
                     lastCastedHoldableObject = null;
@@ -97,6 +111,44 @@ public class HoldingObjectController : MonoBehaviour
             }
         }
         #endregion
+
+        if (HoldingObject != null)
+        {
+            //Player is holding an object
+
+            #region Visual
+            if (magicTrailParticleObject == null)
+            {
+                magicTrailParticleObject = Instantiate(holdingMagicParticle);
+            }
+            visualTimer += Time.deltaTime;
+            float percentage = visualTimer / visualTimerMax;
+            if (Player.Instance.HasWand)
+            {
+                magicTrailParticleObject.transform.position = Vector3.Lerp(playerWithWandMagicStartingPos.position, HoldingObject.transform.position, percentage);
+            }
+            else
+            {
+                magicTrailParticleObject.transform.position = Vector3.Lerp(playerWithoutWandMagicStartingPos.position, HoldingObject.transform.position, percentage);
+            }
+            if (percentage >= 1)
+            {
+                visualTimer = 0;
+                Destroy(magicTrailParticleObject);
+                magicTrailParticleObject = null;
+            }
+            #endregion 
+        }
+        else
+        {
+            #region Visual
+            if(magicTrailParticleObject != null)
+            {
+                Destroy(magicTrailParticleObject);
+                magicTrailParticleObject = null;
+            }
+            #endregion
+        }
     }
 
 
