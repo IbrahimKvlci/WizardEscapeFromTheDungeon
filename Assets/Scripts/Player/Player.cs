@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [field: SerializeField] public PlayerVisualController PlayerVisualController { get; set; }
     [field: SerializeField] public PlayerAttackController PlayerAttackController { get; set; }
     [field:SerializeField] public HoldingObjectController HoldingObjectController { get; set;}
+    [field:SerializeField] public PlayerCollectItemController PlayerCollectItemController { get; set; }
     [field: SerializeField] public Dashing Dashing { get; set; }
     [field:SerializeField] public GameObject WandObject { get; set; }
 
