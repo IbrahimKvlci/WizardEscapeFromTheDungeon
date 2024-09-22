@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
         _enemyStateService.Initialize(EnemyIdleState);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         _enemyStateService.CurrentEnemyState.UpdateState();
     }

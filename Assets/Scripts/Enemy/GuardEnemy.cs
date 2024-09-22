@@ -14,7 +14,7 @@ public class GuardEnemy : Enemy
         set { _isSleeping = value; OnSleepingChanged?.Invoke(this, EventArgs.Empty); }
     }
 
-    [field:SerializeField] public EnemyIdleEnum EnemyIdle { get; set; }
+    [field: SerializeField] public EnemyIdleEnum EnemyIdle { get; set; }
     public enum EnemyIdleEnum
     {
         Sleep,
@@ -38,8 +38,9 @@ public class GuardEnemy : Enemy
         }
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (EnemyAttackController.CanAttack)
         {
             IsSleeping = false;
@@ -54,7 +55,7 @@ public class GuardEnemy : Enemy
             IdleEnemyAction = IdleStand;
         }
     }
-    
+
     private void IdleStand()
     {
         Debug.Log("Stay Stand");

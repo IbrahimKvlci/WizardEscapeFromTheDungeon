@@ -39,12 +39,17 @@ public class Door : MonoBehaviour, IInteractable
         }
     }
 
+    public void OpenDoor()
+    {
+        oldRotation = transform.rotation;
+        isDoorOpening=true;
+    }
+
     public void Interact()
     {
         if (Player.Instance.PlayerCollectItemController.KeyCount > 0&&!isDoorOpen)
         {
-            oldRotation = transform.rotation;
-            isDoorOpening=true;
+            OpenDoor();
             Player.Instance.PlayerCollectItemController.KeyCount--;
         }
     }

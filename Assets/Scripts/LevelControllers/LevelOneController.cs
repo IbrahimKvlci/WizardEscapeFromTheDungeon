@@ -6,6 +6,7 @@ public class LevelOneController : MonoBehaviour
 {
     [SerializeField] private List<Enemy> enemyList;
     [SerializeField] private Door door;
+    [SerializeField] private Door automaticDoor;
 
     private void Start()
     {
@@ -15,6 +16,7 @@ public class LevelOneController : MonoBehaviour
     private void Door_OnDoorIsOpened(object sender, System.EventArgs e)
     {
         MakeEnemiesAttackPlayer();
+        automaticDoor.OpenDoor();
     }
 
     private void MakeEnemiesAttackPlayer()

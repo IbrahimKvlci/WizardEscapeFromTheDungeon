@@ -17,7 +17,7 @@ public class EnemyDeathState : EnemyStateBase
     {
         base.EnterState();
         timer = 0;
-
+        Debug.Log("dead");
         OnEnemyDead?.Invoke(this, EventArgs.Empty);
     }
     public override void UpdateState()
