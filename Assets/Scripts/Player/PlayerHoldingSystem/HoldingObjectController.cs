@@ -6,10 +6,22 @@ using UnityEngine;
 
 public class HoldingObjectController : MonoBehaviour
 {
-    public event EventHandler OnHoldingObject;
-    public event EventHandler OnDroppedObject;
+    public event EventHandler OnHoldingChanged;
 
     [field: Header("Settings")]
+    private bool _isHolding;
+    public bool IsHolding
+    {
+        get
+        {
+            return _isHolding;
+        }
+        set
+        {
+            _isHolding = value;
+            OnHoldingChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
     [SerializeField] private LayerMask layer;
     [SerializeField] private float moveHoldingObjectSpeedForwardBack;
     [SerializeField] private float rayLength;
@@ -58,8 +70,6 @@ public class HoldingObjectController : MonoBehaviour
                     holdPosTransform.position = hitInfo.transform.position;
                     holdable.Hold(holdPosTransform);
                     firstFrameAfterHold = false;
-
-                    OnHoldingObject?.Invoke(this, EventArgs.Empty);
                 }
                 lastCastedHoldableObject = holdable;
             }
@@ -92,8 +102,6 @@ public class HoldingObjectController : MonoBehaviour
             {
                 HoldingObject.GetComponent<IHoldable>().Drop();
                 HoldingObject = null;
-
-                OnDroppedObject?.Invoke(this, EventArgs.Empty);
             }
         }
         #endregion
@@ -115,6 +123,10 @@ public class HoldingObjectController : MonoBehaviour
         if (HoldingObject != null)
         {
             //Player is holding an object
+            if (!IsHolding)
+            {
+                IsHolding = true;
+            }
 
             #region Visual
             if (magicTrailParticleObject == null)
@@ -141,6 +153,11 @@ public class HoldingObjectController : MonoBehaviour
         }
         else
         {
+            if (IsHolding)
+            {
+                IsHolding = false;
+            }
+
             #region Visual
             if(magicTrailParticleObject != null)
             {

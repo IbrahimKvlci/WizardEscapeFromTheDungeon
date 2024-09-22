@@ -15,6 +15,10 @@ public class PlayerCollectItemController : MonoBehaviour
     {
         KeyCount++;
     }
+    public void CollectWand()
+    {
+        Player.Instance.HasWand = true;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

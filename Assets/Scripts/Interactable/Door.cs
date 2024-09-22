@@ -10,7 +10,13 @@ public class Door : MonoBehaviour, IInteractable
 
     private Quaternion oldRotation;
     private bool isDoorOpening;
+    private bool isDoorOpen;
     private float timer;
+
+    private void Start()
+    {
+        isDoorOpen = false;
+    }
 
     private void Update()
     {
@@ -23,13 +29,14 @@ public class Door : MonoBehaviour, IInteractable
             if (percantage > 1)
             {
                 isDoorOpening = false;
+                isDoorOpen = true;
             }
         }
     }
 
     public void Interact()
     {
-        if (Player.Instance.PlayerCollectItemController.KeyCount > 0)
+        if (Player.Instance.PlayerCollectItemController.KeyCount > 0&&!isDoorOpen)
         {
             oldRotation = transform.rotation;
             isDoorOpening=true;

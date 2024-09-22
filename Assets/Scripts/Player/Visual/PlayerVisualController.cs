@@ -27,19 +27,14 @@ public class PlayerVisualController : MonoBehaviour
         player.PlayerAttackController.OnAttack += PlayerAttackController_OnAttack;
         player.OnStunChanged += Player_OnStunChanged;
         player.OnWandActiveChanged += Player_OnWandActiveChanged;
-        player.HoldingObjectController.OnHoldingObject += HoldingObjectController_OnHoldingObject;
-        player.HoldingObjectController.OnDroppedObject += HoldingObjectController_OnDroppedObject;
+        player.HoldingObjectController.OnHoldingChanged += HoldingObjectController_OnHoldingChanged;
     }
 
-    private void HoldingObjectController_OnDroppedObject(object sender, System.EventArgs e)
+    private void HoldingObjectController_OnHoldingChanged(object sender, System.EventArgs e)
     {
-        SetAnimationBool(AnimationEnum.IsHolding, false);
+        SetAnimationBool(AnimationEnum.IsHolding, player.HoldingObjectController.IsHolding);
     }
 
-    private void HoldingObjectController_OnHoldingObject(object sender, System.EventArgs e)
-    {
-        SetAnimationBool(AnimationEnum.IsHolding, true);
-    }
 
     private void Player_OnWandActiveChanged(object sender, System.EventArgs e)
     {
@@ -87,8 +82,7 @@ public class PlayerVisualController : MonoBehaviour
         player.PlayerMovementController.OnFallingChanged -= PlayerMovementController_OnFallingChanged;
         player.OnStunChanged -= Player_OnStunChanged;
         player.OnWandActiveChanged -= Player_OnWandActiveChanged;
-        player.HoldingObjectController.OnHoldingObject -= HoldingObjectController_OnHoldingObject;
-        player.HoldingObjectController.OnDroppedObject -= HoldingObjectController_OnDroppedObject;
+        player.HoldingObjectController.OnHoldingChanged -= HoldingObjectController_OnHoldingChanged;
     }
 
     private void PlayerMovementController_OnRunningChanged(object sender, System.EventArgs e)

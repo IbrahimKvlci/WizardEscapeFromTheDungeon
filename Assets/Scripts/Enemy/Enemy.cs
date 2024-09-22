@@ -1,27 +1,28 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
 
-    public Action IdleEnemyAction {  get; set; }
+    public Action IdleEnemyAction { get; set; }
 
-    [field:SerializeField] public EnemySO EnemySO {  get; private set; }
-    [field: SerializeField] public EnemyHealth EnemyHealth {  get; set; }
-    [field:SerializeField] public EnemyAttackController EnemyAttackController { get; set; }
+    [field: SerializeField] public EnemySO EnemySO { get; private set; }
+    [field: SerializeField] public EnemyHealth EnemyHealth { get; set; }
+    [field: SerializeField] public EnemyAttackController EnemyAttackController { get; set; }
     [field: SerializeField] public EnemyMovementController EnemyMovementController { get; set; }
     [field: SerializeField] public EnemyTriggerController EnemyTriggerController { get; set; }
 
-    [SerializeField] private List<HoldableObject> holdableObjectList;
+    [SerializeField] private Transform holdableObjectList;
 
 
     public IEnemyState EnemyIdleState { get; set; }
     public IEnemyState EnemyChaseState { get; set; }
     public IEnemyState EnemyAimState { get; set; }
     public IEnemyState EnemyAttackState { get; set; }
-    public IEnemyState EnemyDeathState {  get; set; }
+    public IEnemyState EnemyDeathState { get; set; }
 
 
     private IEnemyStateService _enemyStateService;
@@ -34,7 +35,7 @@ public class Enemy : MonoBehaviour
         EnemyChaseState = new EnemyChasePlayerState(this, _enemyStateService);
         EnemyAimState = new EnemyAimState(this, _enemyStateService);
         EnemyAttackState = new EnemyAttackState(this, _enemyStateService);
-        EnemyDeathState=new EnemyDeathState(this, _enemyStateService);
+        EnemyDeathState = new EnemyDeathState(this, _enemyStateService);
     }
 
     private void Start()
@@ -50,12 +51,10 @@ public class Enemy : MonoBehaviour
 
     public void DropHoldableObjectsOnEnemy()
     {
-        if(holdableObjectList.Count > 0)
+
+        foreach (Transform holdableObject in holdableObjectList)
         {
-            foreach (var holdableObject in holdableObjectList)
-            {
-                holdableObject.Drop();
-            }
+            holdableObject.gameObject.GetComponent<IHoldable>().Drop();
         }
     }
 
