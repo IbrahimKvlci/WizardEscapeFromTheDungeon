@@ -38,6 +38,14 @@ public class GuardEnemy : Enemy
         }
     }
 
+    private void Update()
+    {
+        if (EnemyAttackController.CanAttack)
+        {
+            IsSleeping = false;
+        }
+    }
+
     private void IdleSleep()
     {
         Debug.Log("Sleeping");

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable
 {
+    public event EventHandler OnDoorIsOpened;
+
     [SerializeField] private Quaternion newRotation;
     [SerializeField] private float doorOpenTimerMax;
 
@@ -30,6 +33,8 @@ public class Door : MonoBehaviour, IInteractable
             {
                 isDoorOpening = false;
                 isDoorOpen = true;
+
+                OnDoorIsOpened?.Invoke(this,EventArgs.Empty);
             }
         }
     }
