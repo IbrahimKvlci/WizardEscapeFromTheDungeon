@@ -18,6 +18,7 @@ public class Dashing : MonoBehaviour
 
     [field: Header("Cooldown")]
     [SerializeField] private float dashTimerMax;
+    [SerializeField] private float dashStunTimerMax;
     private float dashTimer;
 
     [field: Header("Porperties")]
@@ -69,7 +70,7 @@ public class Dashing : MonoBehaviour
         rb.AddForce(forceToApply,ForceMode.Impulse);
         yield return new WaitForSeconds(dashDuration);
         ResetDash();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(dashStunTimerMax);
         player.IsStunned = false;
     }
 
