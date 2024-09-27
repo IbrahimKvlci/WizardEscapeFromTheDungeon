@@ -6,7 +6,7 @@ public class EnemyTriggerDetector : MonoBehaviour
 {
     private bool _isEnemyTriggeredToBeAttacked;
     [SerializeField] private BoxCollider boxCollider;
-    [SerializeField] private Enemy enemy;
+    [SerializeField] private BasicEnemy enemy;
 
     private void Start()
     {
