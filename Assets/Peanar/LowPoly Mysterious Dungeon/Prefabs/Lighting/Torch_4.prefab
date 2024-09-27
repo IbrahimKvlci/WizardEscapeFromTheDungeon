@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8335719862822002411}
   - component: {fileID: 4222040985689547426}
   - component: {fileID: 880886853243513927}
+  - component: {fileID: 3842559486568918092}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -107,6 +108,29 @@ Halo:
     serializedVersion: 2
     rgba: 4283814655
   m_Size: 0.3
+--- !u!114 &3842559486568918092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5724621993810066034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &6358674762226974580
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +143,8 @@ GameObject:
   - component: {fileID: 8742005620342582154}
   - component: {fileID: 212893611344612326}
   - component: {fileID: 8700174129477860960}
-  m_Layer: 0
+  - component: {fileID: 6887147010023611508}
+  m_Layer: 10
   m_Name: Torch_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,8 +226,29 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6358674762226974580}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.14344132, y: 0.6859175, z: 0.32073906}
   m_Center: {x: 0.0009197111, y: 0.123970784, z: -0.16036956}
+--- !u!114 &6887147010023611508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6358674762226974580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae178693969132f418ae8fbbdb305944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightObject: {fileID: 5724621993810066034}

@@ -108,7 +108,7 @@ public class PlayerAttackController : MonoBehaviour
         player.PlayerMovementController.CanMove = false;
 
         MagicBase magicBase = Instantiate(Magic.MagicSO.prefab, magicFireLoc.transform.position, Quaternion.identity).GetComponent<MagicBase>();
-        magicBase.TargetEnemy = enemy;
+        magicBase.TargetObject = enemy.gameObject;
         magicBase.MagicTimerMax = AttackTimerMax;
 
         magicFreezeTimerList[magicIndex] = 0;

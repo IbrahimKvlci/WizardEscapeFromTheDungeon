@@ -17,6 +17,8 @@ public class PlayerInteractController : MonoBehaviour
                     interactable.Interact();
                 }
             }
+
+
         }
     }
 }

@@ -6,7 +6,7 @@ public class MagicBase : MonoBehaviour
 {
     [field:SerializeField] public MagicSO MagicSO {  get; private set; }
 
-    public Enemy TargetEnemy { get; set; }
+    public GameObject TargetObject { get; set; }
     public float MagicTimerMax { get; set; }
 
     private Vector3 startingPos;
@@ -19,12 +19,12 @@ public class MagicBase : MonoBehaviour
 
     private void Update()
     {
-        if (TargetEnemy != null)
+        if (TargetObject != null)
         {
             timer += Time.deltaTime;
             float transformPercantage=timer/MagicTimerMax;
 
-            transform.position = Vector3.Slerp(startingPos, TargetEnemy.transform.position, transformPercantage);
+            transform.position = Vector3.Slerp(startingPos, TargetObject.transform.position, transformPercantage);
             if (transformPercantage >= 1f)
             {
                 Destroy(this.gameObject);

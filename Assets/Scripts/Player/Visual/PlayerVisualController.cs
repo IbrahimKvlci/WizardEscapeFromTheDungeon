@@ -28,6 +28,12 @@ public class PlayerVisualController : MonoBehaviour
         player.OnStunChanged += Player_OnStunChanged;
         player.OnWandActiveChanged += Player_OnWandActiveChanged;
         player.HoldingObjectController.OnHoldingChanged += HoldingObjectController_OnHoldingChanged;
+        player.PlayerMagicInteractController.OnMagicInteract += PlayerMagicInteractController_OnMagicInteract;
+    }
+
+    private void PlayerMagicInteractController_OnMagicInteract(object sender, System.EventArgs e)
+    {
+        TriggerAnimationById(AnimationEnum.AttackTrigger, 1);
     }
 
     private void HoldingObjectController_OnHoldingChanged(object sender, System.EventArgs e)
@@ -83,6 +89,8 @@ public class PlayerVisualController : MonoBehaviour
         player.OnStunChanged -= Player_OnStunChanged;
         player.OnWandActiveChanged -= Player_OnWandActiveChanged;
         player.HoldingObjectController.OnHoldingChanged -= HoldingObjectController_OnHoldingChanged;
+        player.PlayerMagicInteractController.OnMagicInteract -= PlayerMagicInteractController_OnMagicInteract;
+
     }
 
     private void PlayerMovementController_OnRunningChanged(object sender, System.EventArgs e)

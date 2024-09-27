@@ -16,7 +16,19 @@ public class Player : MonoBehaviour
     [field:SerializeField] public HoldingObjectController HoldingObjectController { get; set;}
     [field:SerializeField] public PlayerCollectItemController PlayerCollectItemController { get; set; }
     [field: SerializeField] public Dashing Dashing { get; set; }
+    [field: SerializeField] public PlayerMagicInteractController PlayerMagicInteractController { get; set; }
     [field:SerializeField] public GameObject WandObject { get; set; }
+    [SerializeField] private GameObject MagicLocationWithWand;
+    [SerializeField] private GameObject MagicLocationWithoutWand;
+    public GameObject MagicLocation
+    {
+        get
+        {
+            if(HasWand)
+                return MagicLocationWithWand;
+            return MagicLocationWithoutWand;
+        }
+    }
 
     [field: Header("Settings")]
     private bool _isStunned;
