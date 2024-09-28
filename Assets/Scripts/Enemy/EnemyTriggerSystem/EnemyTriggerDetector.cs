@@ -5,26 +5,26 @@ using UnityEngine;
 public class EnemyTriggerDetector : MonoBehaviour
 {
     private bool _isEnemyTriggeredToBeAttacked;
-    [SerializeField] private BoxCollider boxCollider;
-    [SerializeField] private BasicEnemy enemy;
+    [SerializeField] private Collider _collider;
+    [SerializeField] private Enemy enemy;
 
     private void Start()
     {
         _isEnemyTriggeredToBeAttacked = false;
-        boxCollider.enabled = false;
-        ((EnemyAttackState)enemy.EnemyAttackState).OnAttackStarted += EnemyTriggerDetector_OnAttackStarted;
-        ((EnemyAttackState)enemy.EnemyAttackState).OnAttackFinished += EnemyTriggerDetector_OnAttackFinished;
+        _collider.enabled = false;
+        enemy.EnemyAttackController.OnAttackStarted += EnemyTriggerDetector_OnAttackStarted;
+        enemy.EnemyAttackController.OnAttackEnded += EnemyTriggerDetector_OnAttackFinished;
 
     }
 
     private void EnemyTriggerDetector_OnAttackFinished(object sender, System.EventArgs e)
     {
-        boxCollider.enabled = false;
+        _collider.enabled = false;
     }
 
     private void EnemyTriggerDetector_OnAttackStarted(object sender, System.EventArgs e)
     {
-        boxCollider.enabled = true;
+        _collider.enabled = true;
         _isEnemyTriggeredToBeAttacked = false;
     }
 
@@ -38,7 +38,7 @@ public class EnemyTriggerDetector : MonoBehaviour
         if (other.TryGetComponent<Player>(out Player player))
         {
             _isEnemyTriggeredToBeAttacked = true;
-            boxCollider.enabled = false;
+            _collider.enabled = false;
 
         }
     }

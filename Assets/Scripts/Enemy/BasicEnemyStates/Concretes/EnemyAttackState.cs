@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class EnemyAttackState : EnemyStateBase
 {
-    public event EventHandler OnAttackStarted;
-    public event EventHandler OnAttackFinished;
+    //public event EventHandler OnAttackStarted;
+    //public event EventHandler OnAttackFinished;
 
     private float timer;
     private bool isAttacked;
@@ -17,7 +17,8 @@ public class EnemyAttackState : EnemyStateBase
     public override void EnterState()
     {
         base.EnterState();
-        OnAttackStarted?.Invoke(this, EventArgs.Empty);
+        //OnAttackStarted?.Invoke(this, EventArgs.Empty);
+        _enemy.EnemyAttackController.AttackStarted();
         timer = 0;
         isAttacked = false;
     }
@@ -39,6 +40,7 @@ public class EnemyAttackState : EnemyStateBase
     public override void ExitState()
     {
         base.ExitState();
-        OnAttackFinished?.Invoke(this, EventArgs.Empty);
+        //OnAttackFinished?.Invoke(this, EventArgs.Empty);
+        _enemy.EnemyAttackController?.AttackFinished();
     }
 }

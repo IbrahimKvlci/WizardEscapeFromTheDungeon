@@ -18,7 +18,7 @@ public class GuardEnemyVisual : MonoBehaviour
     private void Start()
     {
         enemy.OnSleepingChanged += Enemy_OnSleepingChanged;
-        ((EnemyAttackState)enemy.EnemyAttackState).OnAttackStarted += GuardEnemyVisual_OnAttack;
+        enemy.EnemyAttackController.OnAttackStarted += GuardEnemyVisual_OnAttack;
         ((EnemyDeathState)enemy.EnemyDeathState).OnEnemyDead += GuardEnemyVisual_OnEnemyDead;
         enemy.EnemyMovementController.OnEnemyMovementChanged += EnemyMovementController_OnEnemyMovementChanged;
 
@@ -43,7 +43,7 @@ public class GuardEnemyVisual : MonoBehaviour
     private void OnDisable()
     {
         enemy.OnSleepingChanged -= Enemy_OnSleepingChanged;
-        ((EnemyAttackState)enemy.EnemyAttackState).OnAttackStarted -= GuardEnemyVisual_OnAttack;
+        enemy.EnemyAttackController.OnAttackStarted -= GuardEnemyVisual_OnAttack;
         ((EnemyDeathState)enemy.EnemyDeathState).OnEnemyDead -= GuardEnemyVisual_OnEnemyDead;
         enemy.EnemyMovementController.OnEnemyMovementChanged -= EnemyMovementController_OnEnemyMovementChanged;
 
