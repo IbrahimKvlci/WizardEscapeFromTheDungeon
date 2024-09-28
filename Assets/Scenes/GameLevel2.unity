@@ -16477,12 +16477,12 @@ PrefabInstance:
     - target: {fileID: 4632542111608105992, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016925942
+      value: -0.000000016925942
       objectReference: {fileID: 0}
     - target: {fileID: 4632542111608105992, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000030938747
+      value: 0.0000000030938747
       objectReference: {fileID: 0}
     - target: {fileID: 5649331505138213322, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
@@ -19028,6 +19028,12 @@ PrefabInstance:
       propertyPath: RockPrefab
       value: 
       objectReference: {fileID: 5298590762127773683, guid: cad9f745870d9f448bf225d2a253d382,
+        type: 3}
+    - target: {fileID: 8716879275511033141, guid: 2ecb884b3ca95a649b76d5223d83a804,
+        type: 3}
+      propertyPath: earthquakeRockPrefab
+      value: 
+      objectReference: {fileID: 990815035537852956, guid: 161b1d666db48c446b3ef902cbb688b8,
         type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

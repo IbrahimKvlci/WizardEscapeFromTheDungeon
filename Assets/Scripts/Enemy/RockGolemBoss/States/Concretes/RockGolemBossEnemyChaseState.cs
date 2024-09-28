@@ -25,7 +25,7 @@ public class RockGolemBossEnemyChaseState : RockGolemBossEnemyStateBase
         }
         else
         {
-            _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.ThrowRockState);
+            _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.EarthquakeState);
         }
     }
 

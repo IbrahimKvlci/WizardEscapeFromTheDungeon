@@ -375,6 +375,10 @@ MonoBehaviour:
   rockPrefab: {fileID: 5298590762127773683, guid: cad9f745870d9f448bf225d2a253d382,
     type: 3}
   rockLocation: {fileID: 4483473187364245115}
+  earthquakeRockPrefab: {fileID: 990815035537852956, guid: 161b1d666db48c446b3ef902cbb688b8,
+    type: 3}
+  earthquakeRockMarkerPrefab: {fileID: 5019499608905661077, guid: abd11554923e3344abfec83b5a0ba210,
+    type: 3}
 --- !u!195 &6699658875083639313
 NavMeshAgent:
   m_ObjectHideFlags: 0

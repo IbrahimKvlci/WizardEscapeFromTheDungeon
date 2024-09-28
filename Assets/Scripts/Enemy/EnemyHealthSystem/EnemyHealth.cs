@@ -9,6 +9,11 @@ public class EnemyHealth : MonoBehaviour
     public float Health { get; set; }
     public bool IsDead { get; set; }
 
+    private void Start()
+    {
+        Health=enemy.EnemySO.health;
+    }
+
     public void TakeDamage(float damage)
     {
         Health -= damage;

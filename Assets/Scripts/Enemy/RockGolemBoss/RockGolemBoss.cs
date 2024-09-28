@@ -6,6 +6,8 @@ public class RockGolemBoss : Enemy
 {
     [SerializeField] public GameObject rockPrefab;
     [SerializeField] public Transform rockLocation;
+    [SerializeField] public GameObject earthquakeRockPrefab;
+    [SerializeField] public GameObject earthquakeRockMarkerPrefab;
 
     public IRockGolemBossEnemyState IdleState {  get; set; }
     public IRockGolemBossEnemyState ChaseState { get; set; }
