@@ -152,7 +152,6 @@ public class PlayerMovementController : MonoBehaviour
         Grounded=true;
         IsFalling=false;
         IsMoving=false;
-        Debug.Log("fal");
     }
 
 

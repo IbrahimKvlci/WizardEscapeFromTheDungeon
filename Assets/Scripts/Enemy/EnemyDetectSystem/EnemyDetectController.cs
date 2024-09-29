@@ -25,7 +25,6 @@ public class EnemyDetectController : MonoBehaviour
             if (!Player.Instance.PlayerAttackController.TargetEnemyList.Contains(enemy))
             {
                 Player.Instance.PlayerAttackController.TargetEnemyList.Add(enemy);
-                Debug.Log("VISIBLE");
             }
         }
         else

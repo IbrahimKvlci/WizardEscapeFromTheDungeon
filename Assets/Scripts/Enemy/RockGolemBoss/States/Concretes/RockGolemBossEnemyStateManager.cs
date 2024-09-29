@@ -14,8 +14,15 @@ public class RockGolemBossEnemyStateManager : IRockGolemBossEnemyStateService
 
     public void SwitchState(IRockGolemBossEnemyState state)
     {
-        CurrentState.ExitState();
-        CurrentState=state;
-        CurrentState.EnterState();
+        if (CurrentState.CanChangeState)
+        {
+            CurrentState.ExitState();
+            CurrentState = state;
+            CurrentState.EnterState();
+        }
+        else
+        {
+            Debug.LogError("You cannot change state");
+        }
     }
 }

@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RockGolemBossEnemyThrowRockState : RockGolemBossEnemyStateBase
 {
+    public event EventHandler OnThrowingRock;
+
     private GameObject rockObject;
     private Vector3 firstThrowRockLocation,firstPlayerLocation;
 
@@ -18,10 +21,14 @@ public class RockGolemBossEnemyThrowRockState : RockGolemBossEnemyStateBase
     public override void EnterState()
     {
         base.EnterState();
+        OnThrowingRock?.Invoke(this,EventArgs.Empty);
         rockObject = GameObject.Instantiate(_rockGolemBoss.rockPrefab,_rockGolemBoss.rockLocation);
         firstFrame = true;
         throwRockTimer = 0;
         translateTimer = 0;
+        _rockGolemBoss.ThrowRockTimer= 0;
+
+        CanChangeState = false;
     }
 
     public override void UpdateState()
@@ -45,7 +52,9 @@ public class RockGolemBossEnemyThrowRockState : RockGolemBossEnemyStateBase
 
             if (percantage >= 1)
             {
-                _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.ChaseState);
+
+                CanChangeState = true;
+                _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.IdleState);
             }
         }
         else

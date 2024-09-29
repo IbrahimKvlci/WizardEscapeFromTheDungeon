@@ -14,6 +14,8 @@ public class RockGolemBossEnemyPunchState : RockGolemBossEnemyStateBase
     {
         base.EnterState();
         timer = _rockGolemBoss.EnemySO.enemyAimAttackTimerMax;
+
+        CanChangeState = true;
     }
 
     public override void UpdateState()
@@ -40,7 +42,7 @@ public class RockGolemBossEnemyPunchState : RockGolemBossEnemyStateBase
 
         if (!_rockGolemBoss.EnemyTriggerController.IsPlayerTriggeredToBePreparedForAttack())
         {
-            _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.ChaseState);
+            _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.IdleState);
         }
     }
 
@@ -51,6 +53,7 @@ public class RockGolemBossEnemyPunchState : RockGolemBossEnemyStateBase
 
     private IEnumerator Attack()
     {
+        CanChangeState = false;
         _rockGolemBoss.EnemyAttackController.AttackStarted();
         if (_rockGolemBoss.EnemyTriggerController.EnemyTriggerDetector.IsEnemyTriggeredToBeAttacked())
         {
@@ -58,5 +61,6 @@ public class RockGolemBossEnemyPunchState : RockGolemBossEnemyStateBase
         }
         yield return new WaitForSeconds(2);
         _rockGolemBoss.EnemyAttackController.AttackFinished();
+        CanChangeState = true;
     }
 }

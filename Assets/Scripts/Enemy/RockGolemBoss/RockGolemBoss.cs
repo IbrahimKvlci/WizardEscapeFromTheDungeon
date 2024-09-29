@@ -9,6 +9,11 @@ public class RockGolemBoss : Enemy
     [SerializeField] public GameObject earthquakeRockPrefab;
     [SerializeField] public GameObject earthquakeRockMarkerPrefab;
 
+    [field:SerializeField] public RockGolemBossVisual RockGolemBossVisual {  get; set; }
+
+    public float EarthquakeTimer {  get; set; }
+    public float ThrowRockTimer { get; set; }
+
     public IRockGolemBossEnemyState IdleState {  get; set; }
     public IRockGolemBossEnemyState ChaseState { get; set; }
     public IRockGolemBossEnemyState PunchState { get; set; }
@@ -41,5 +46,8 @@ public class RockGolemBoss : Enemy
     {
         base.Update();
         _rockGolemBossEnemyStateService.CurrentState.UpdateState();
+
+        EarthquakeTimer += Time.deltaTime;
+        ThrowRockTimer += Time.deltaTime;
     }
 }

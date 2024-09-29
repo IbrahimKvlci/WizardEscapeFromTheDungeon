@@ -24,6 +24,12 @@ public class EnemyMovementController : MonoBehaviour
         navMeshAgent.isStopped = !canMove;
         navMeshAgent.ResetPath();
 
+        if (!canMove)
+        {
+            navMeshAgent.velocity = Vector3.zero;
+            navMeshAgent.speed = 0;
+        }
+
         OnEnemyMovementChanged?.Invoke(this, EventArgs.Empty);
     }
 }

@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RockGolemBossEnemyEarthquakeState : RockGolemBossEnemyStateBase
 {
+    public event EventHandler OnEarthquake;
+
     private float timer;
 
     public RockGolemBossEnemyEarthquakeState(RockGolemBoss rockGolemBoss, IRockGolemBossEnemyStateService rockGolemBossEnemyStateService) : base(rockGolemBoss, rockGolemBossEnemyStateService)
@@ -13,16 +16,23 @@ public class RockGolemBossEnemyEarthquakeState : RockGolemBossEnemyStateBase
     public override void EnterState()
     {
         base.EnterState();
+        OnEarthquake?.Invoke(this, EventArgs.Empty);
         timer = 0;
+        _rockGolemBoss.EarthquakeTimer = 0;
+
+        CanChangeState = false;
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        if (timer >= 4)
+        if (timer >= 8)
         {
             _rockGolemBoss.StartCoroutine(CreateRock());
             timer = 0;
+            CanChangeState = true;
+
+            _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.IdleState);
         }
         else 
         { 
