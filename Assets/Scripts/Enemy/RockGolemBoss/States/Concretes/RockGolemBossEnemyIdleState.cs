@@ -22,7 +22,7 @@ public class RockGolemBossEnemyIdleState : RockGolemBossEnemyStateBase
         {
             _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.PunchState);
         }
-        else if (_rockGolemBoss.ThrowRockTimer >= 20 && Vector3.Distance(_rockGolemBoss.transform.position, Player.Instance.transform.position) >= 10)
+        else if (_rockGolemBoss.ThrowRockTimer >= 20 && Vector3.Distance(_rockGolemBoss.transform.position, Player.Instance.transform.position) >= 0)
         {
             _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.ThrowRockState);
         }

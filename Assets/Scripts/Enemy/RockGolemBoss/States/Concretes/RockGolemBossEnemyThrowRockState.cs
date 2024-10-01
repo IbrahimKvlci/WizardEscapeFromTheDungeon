@@ -10,9 +10,9 @@ public class RockGolemBossEnemyThrowRockState : RockGolemBossEnemyStateBase
     private GameObject rockObject;
     private Vector3 firstThrowRockLocation,firstPlayerLocation;
 
-    private float throwRockTimer,translateTimer;
+    private float translateTimer;
 
-    private bool firstFrame;
+    private bool isRockThrowed;
 
     public RockGolemBossEnemyThrowRockState(RockGolemBoss rockGolemBoss, IRockGolemBossEnemyStateService rockGolemBossEnemyStateService) : base(rockGolemBoss, rockGolemBossEnemyStateService)
     {
@@ -21,29 +21,42 @@ public class RockGolemBossEnemyThrowRockState : RockGolemBossEnemyStateBase
     public override void EnterState()
     {
         base.EnterState();
+        _rockGolemBoss.RockGolemBossVisual.OnGetRock += RockGolemBossVisual_OnGetRock;
+        _rockGolemBoss.RockGolemBossVisual.OnThrowRock += RockGolemBossVisual_OnThrowRock;
+        _rockGolemBoss.RockGolemBossVisual.OnThrowingFinished += RockGolemBossVisual_OnThrowingFinished;
+
         OnThrowingRock?.Invoke(this,EventArgs.Empty);
-        rockObject = GameObject.Instantiate(_rockGolemBoss.rockPrefab,_rockGolemBoss.rockLocation);
-        firstFrame = true;
-        throwRockTimer = 0;
+        
+        isRockThrowed = false;
         translateTimer = 0;
         _rockGolemBoss.ThrowRockTimer= 0;
 
         CanChangeState = false;
+
+    }
+
+    private void RockGolemBossVisual_OnThrowingFinished(object sender, EventArgs e)
+    {
+
+    }
+
+    private void RockGolemBossVisual_OnThrowRock(object sender, EventArgs e)
+    {
+        firstThrowRockLocation = rockObject.transform.position;
+        firstPlayerLocation = Player.Instance.transform.position;
+        isRockThrowed= true;
+    }
+
+    private void RockGolemBossVisual_OnGetRock(object sender, EventArgs e)
+    {
+        rockObject = GameObject.Instantiate(_rockGolemBoss.rockPrefab, _rockGolemBoss.rockLocation);
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        if (throwRockTimer >= 4)
+        if (isRockThrowed)
         {
-            if (firstFrame)
-            {
-                firstThrowRockLocation= rockObject.transform.position;
-                firstPlayerLocation=Player.Instance.transform.position;
-
-                firstFrame = false;
-            }
-
             translateTimer += Time.deltaTime;
             float percantage = translateTimer / 0.5f;
 
@@ -52,7 +65,7 @@ public class RockGolemBossEnemyThrowRockState : RockGolemBossEnemyStateBase
 
             if (percantage >= 1)
             {
-
+                isRockThrowed = false;
                 CanChangeState = true;
                 _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.IdleState);
             }
@@ -63,13 +76,15 @@ public class RockGolemBossEnemyThrowRockState : RockGolemBossEnemyStateBase
             Vector3 enemyForwardVector = Player.Instance.transform.position - _rockGolemBoss.transform.position;
             _rockGolemBoss.transform.forward = Vector3.Slerp(_rockGolemBoss.transform.forward, enemyForwardVector, 0.05f);
 
-            throwRockTimer += Time.deltaTime;
         }
     }
 
     public override void ExitState()
     {
         base.ExitState();
+        _rockGolemBoss.RockGolemBossVisual.OnGetRock -= RockGolemBossVisual_OnGetRock;
+        _rockGolemBoss.RockGolemBossVisual.OnThrowRock -= RockGolemBossVisual_OnThrowRock;
+        _rockGolemBoss.RockGolemBossVisual.OnThrowingFinished -= RockGolemBossVisual_OnThrowingFinished;
     }
 
 

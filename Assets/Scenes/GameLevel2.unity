@@ -16462,12 +16462,12 @@ PrefabInstance:
     - target: {fileID: 1569976831472363975, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000016979413
+      value: 0.000000016979417
       objectReference: {fileID: 0}
     - target: {fileID: 1569976831472363975, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000027854885
+      value: -0.000000002785489
       objectReference: {fileID: 0}
     - target: {fileID: 2525924050847176012, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
@@ -17537,12 +17537,12 @@ PrefabInstance:
     - target: {fileID: 6947752975206959010, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000008489705
+      value: 0.000000008489711
       objectReference: {fileID: 0}
     - target: {fileID: 6947752975206959010, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000013927439
+      value: -0.0000000013927447
       objectReference: {fileID: 0}
     - target: {fileID: 7807410434673106738, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
@@ -19474,6 +19474,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1897156915 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4424989672959014347, guid: 2ecb884b3ca95a649b76d5223d83a804,
+    type: 3}
+  m_PrefabInstance: {fileID: 2012659070}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897156910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a0efff51f36174ba56f8378ecfd4ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1898303357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20122,6 +20134,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 990815035537852956, guid: 161b1d666db48c446b3ef902cbb688b8,
         type: 3}
+    - target: {fileID: 8716879275511033141, guid: 2ecb884b3ca95a649b76d5223d83a804,
+        type: 3}
+      propertyPath: <RockGolemBossVisual>k__BackingField
+      value: 
+      objectReference: {fileID: 1897156915}
     m_RemovedComponents:
     - {fileID: 632944475942939889, guid: 2ecb884b3ca95a649b76d5223d83a804, type: 3}
     m_RemovedGameObjects: []
