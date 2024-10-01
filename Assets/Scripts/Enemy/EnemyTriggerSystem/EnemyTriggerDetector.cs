@@ -11,22 +11,22 @@ public class EnemyTriggerDetector : MonoBehaviour
     private void Start()
     {
         _isEnemyTriggeredToBeAttacked = false;
-        _collider.enabled = false;
-        enemy.EnemyAttackController.OnAttackStarted += EnemyTriggerDetector_OnAttackStarted;
-        enemy.EnemyAttackController.OnAttackEnded += EnemyTriggerDetector_OnAttackFinished;
+       // _collider.enabled = false;
+        //enemy.EnemyAttackController.OnAttackStarted += EnemyTriggerDetector_OnAttackStarted;
+        //enemy.EnemyAttackController.OnAttackEnded += EnemyTriggerDetector_OnAttackFinished;
 
     }
 
-    private void EnemyTriggerDetector_OnAttackFinished(object sender, System.EventArgs e)
-    {
-        _collider.enabled = false;
-    }
+    //private void EnemyTriggerDetector_OnAttackFinished(object sender, System.EventArgs e)
+    //{
+    //    _collider.enabled = false;
+    //}
 
-    private void EnemyTriggerDetector_OnAttackStarted(object sender, System.EventArgs e)
-    {
-        _collider.enabled = true;
-        _isEnemyTriggeredToBeAttacked = false;
-    }
+    //private void EnemyTriggerDetector_OnAttackStarted(object sender, System.EventArgs e)
+    //{
+    //    _collider.enabled = true;
+    //    _isEnemyTriggeredToBeAttacked = false;
+    //}
 
     public bool IsEnemyTriggeredToBeAttacked()
     {
@@ -38,8 +38,16 @@ public class EnemyTriggerDetector : MonoBehaviour
         if (other.TryGetComponent<Player>(out Player player))
         {
             _isEnemyTriggeredToBeAttacked = true;
-            _collider.enabled = false;
+            //_collider.enabled = false;
 
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent<Player>(out Player player))
+        {
+            _isEnemyTriggeredToBeAttacked = false;
         }
     }
 }

@@ -7,7 +7,6 @@ public class RockGolemBossEnemyEarthquakeState : RockGolemBossEnemyStateBase
 {
     public event EventHandler OnEarthquake;
 
-    private float timer;
 
     public RockGolemBossEnemyEarthquakeState(RockGolemBoss rockGolemBoss, IRockGolemBossEnemyStateService rockGolemBossEnemyStateService) : base(rockGolemBoss, rockGolemBossEnemyStateService)
     {
@@ -16,33 +15,38 @@ public class RockGolemBossEnemyEarthquakeState : RockGolemBossEnemyStateBase
     public override void EnterState()
     {
         base.EnterState();
+        _rockGolemBoss.RockGolemBossVisual.OnEarthquakeStarted += RockGolemBossVisual_OnEarthquakeStarted;
+        _rockGolemBoss.RockGolemBossVisual.OnEarthquakeFinished += RockGolemBossVisual_OnEarthquakeFinished;
+
         OnEarthquake?.Invoke(this, EventArgs.Empty);
-        timer = 0;
         _rockGolemBoss.EarthquakeTimer = 0;
 
         CanChangeState = false;
     }
 
+    private void RockGolemBossVisual_OnEarthquakeFinished(object sender, EventArgs e)
+    {
+        CanChangeState = true;
+        _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.IdleState);
+
+    }
+
+    private void RockGolemBossVisual_OnEarthquakeStarted(object sender, EventArgs e)
+    {
+        _rockGolemBoss.StartCoroutine(CreateRock());
+    }
+
     public override void UpdateState()
     {
         base.UpdateState();
-        if (timer >= 8)
-        {
-            _rockGolemBoss.StartCoroutine(CreateRock());
-            timer = 0;
-            CanChangeState = true;
-
-            _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.IdleState);
-        }
-        else 
-        { 
-            timer += Time.deltaTime; 
-        }
     }
 
     public override void ExitState()
     {
         base.ExitState();
+        _rockGolemBoss.RockGolemBossVisual.OnEarthquakeStarted -= RockGolemBossVisual_OnEarthquakeStarted;
+        _rockGolemBoss.RockGolemBossVisual.OnEarthquakeFinished -= RockGolemBossVisual_OnEarthquakeFinished;
+
     }
 
     private IEnumerator CreateRock()

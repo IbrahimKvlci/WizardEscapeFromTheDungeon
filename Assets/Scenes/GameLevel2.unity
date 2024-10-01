@@ -16462,12 +16462,12 @@ PrefabInstance:
     - target: {fileID: 1569976831472363975, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016979417
+      value: -0.000000016979413
       objectReference: {fileID: 0}
     - target: {fileID: 1569976831472363975, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000002785489
+      value: 0.0000000027854885
       objectReference: {fileID: 0}
     - target: {fileID: 2525924050847176012, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
@@ -17537,12 +17537,12 @@ PrefabInstance:
     - target: {fileID: 6947752975206959010, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000008489711
+      value: -0.000000008489705
       objectReference: {fileID: 0}
     - target: {fileID: 6947752975206959010, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000013927447
+      value: 0.0000000013927439
       objectReference: {fileID: 0}
     - target: {fileID: 7807410434673106738, guid: e91b8795992c26d4980fff541991b070,
         type: 3}
@@ -19447,45 +19447,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1884830662}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1897156910 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3498843998270484190, guid: 2ecb884b3ca95a649b76d5223d83a804,
-    type: 3}
-  m_PrefabInstance: {fileID: 2012659070}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1897156913
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1897156910}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 0f2c5202b918687408ac5bc7429a03ea, type: 3}
-  m_Controller: {fileID: 9100000, guid: 83dcd131f0559fe4ea355469bea960a3, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1897156915 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4424989672959014347, guid: 2ecb884b3ca95a649b76d5223d83a804,
-    type: 3}
-  m_PrefabInstance: {fileID: 2012659070}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1897156910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90a0efff51f36174ba56f8378ecfd4ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1898303357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20047,25 +20008,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 632944475942939889, guid: 2ecb884b3ca95a649b76d5223d83a804,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2547982903832822482, guid: 2ecb884b3ca95a649b76d5223d83a804,
         type: 3}
       propertyPath: m_Name
       value: RockGolemBossEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 4424989672959014347, guid: 2ecb884b3ca95a649b76d5223d83a804,
+    - target: {fileID: 2573990369220260852, guid: 2ecb884b3ca95a649b76d5223d83a804,
         type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1897156913}
-    - target: {fileID: 6699658875083639313, guid: 2ecb884b3ca95a649b76d5223d83a804,
+      propertyPath: m_Radius
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573990369220260852, guid: 2ecb884b3ca95a649b76d5223d83a804,
         type: 3}
-      propertyPath: m_Acceleration
-      value: 8
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927277879003653052, guid: 2ecb884b3ca95a649b76d5223d83a804,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927277879003653052, guid: 2ecb884b3ca95a649b76d5223d83a804,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927277879003653052, guid: 2ecb884b3ca95a649b76d5223d83a804,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7871760588788974663, guid: 2ecb884b3ca95a649b76d5223d83a804,
         type: 3}
@@ -20122,32 +20093,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8716879275511033141, guid: 2ecb884b3ca95a649b76d5223d83a804,
-        type: 3}
-      propertyPath: RockPrefab
-      value: 
-      objectReference: {fileID: 5298590762127773683, guid: cad9f745870d9f448bf225d2a253d382,
-        type: 3}
-    - target: {fileID: 8716879275511033141, guid: 2ecb884b3ca95a649b76d5223d83a804,
-        type: 3}
-      propertyPath: earthquakeRockPrefab
-      value: 
-      objectReference: {fileID: 990815035537852956, guid: 161b1d666db48c446b3ef902cbb688b8,
-        type: 3}
-    - target: {fileID: 8716879275511033141, guid: 2ecb884b3ca95a649b76d5223d83a804,
-        type: 3}
-      propertyPath: <RockGolemBossVisual>k__BackingField
-      value: 
-      objectReference: {fileID: 1897156915}
-    m_RemovedComponents:
-    - {fileID: 632944475942939889, guid: 2ecb884b3ca95a649b76d5223d83a804, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3498843998270484190, guid: 2ecb884b3ca95a649b76d5223d83a804,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1897156913}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ecb884b3ca95a649b76d5223d83a804, type: 3}
 --- !u!1001 &2027837565
 PrefabInstance:

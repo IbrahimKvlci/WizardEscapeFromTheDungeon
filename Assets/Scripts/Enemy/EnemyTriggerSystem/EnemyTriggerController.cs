@@ -10,7 +10,7 @@ public class EnemyTriggerController : MonoBehaviour
 
     public bool IsPlayerTriggeredToBePreparedForAttack()
     {
-        return Physics.CheckSphere(enemy.transform.position, enemy.EnemySO.enemyAttackRange, layerMask);
+        return Physics.CheckSphere(enemy.transform.position, enemy.EnemySO.enemyAttackRange-1, layerMask);
     }
     public bool IsPlayerTriggeredToBeAttacked()
     {

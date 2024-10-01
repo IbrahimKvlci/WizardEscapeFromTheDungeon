@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class RockGolemBossEnemyPunchState : RockGolemBossEnemyStateBase
 {
-    float timer;
+    private float timer,attackTimer;
+    private bool isAttacking,attackAnimFinished;
 
     public RockGolemBossEnemyPunchState(RockGolemBoss rockGolemBoss, IRockGolemBossEnemyStateService rockGolemBossEnemyStateService) : base(rockGolemBoss, rockGolemBossEnemyStateService)
     {
@@ -13,9 +14,32 @@ public class RockGolemBossEnemyPunchState : RockGolemBossEnemyStateBase
     public override void EnterState()
     {
         base.EnterState();
-        timer = _rockGolemBoss.EnemySO.enemyAimAttackTimerMax;
+        _rockGolemBoss.RockGolemBossVisual.OnPunchStarted += RockGolemBossVisual_OnPunchStarted;
+        _rockGolemBoss.RockGolemBossVisual.OnPunchFinished += RockGolemBossVisual_OnPunchFinished;
+        _rockGolemBoss.RockGolemBossVisual.OnPunchAnimationFinished += RockGolemBossVisual_OnPunchAnimationFinished;
 
+        timer = _rockGolemBoss.EnemySO.enemyAimAttackTimerMax;
+        attackTimer = 0;
         CanChangeState = true;
+        isAttacking = false;
+        attackAnimFinished = true;
+    }
+
+    private void RockGolemBossVisual_OnPunchAnimationFinished(object sender, System.EventArgs e)
+    {
+        attackAnimFinished = true;
+        CanChangeState = true;
+        _rockGolemBoss.EnemyAttackController.AttackFinished();
+    }
+
+    private void RockGolemBossVisual_OnPunchFinished(object sender, System.EventArgs e)
+    {
+        isAttacking = false;
+    }
+
+    private void RockGolemBossVisual_OnPunchStarted(object sender, System.EventArgs e)
+    {
+        isAttacking = true;
     }
 
     public override void UpdateState()
@@ -24,12 +48,14 @@ public class RockGolemBossEnemyPunchState : RockGolemBossEnemyStateBase
         if (_rockGolemBoss.EnemyTriggerController.IsPlayerTriggeredToBeAttacked())
         {
             //Player triggered
-            if (timer >= _rockGolemBoss.EnemySO.enemyAimAttackTimerMax)
+            if (timer >= _rockGolemBoss.EnemySO.enemyAimAttackTimerMax&&attackAnimFinished)
             {
                 timer = 0;
                 //Punch
-                _rockGolemBoss.StartCoroutine(Attack());
-                
+                //_rockGolemBoss.StartCoroutine(Attack());
+                CanChangeState = false;
+                _rockGolemBoss.EnemyAttackController.AttackStarted();
+                attackAnimFinished = false;
             }
         }
         else
@@ -44,23 +70,19 @@ public class RockGolemBossEnemyPunchState : RockGolemBossEnemyStateBase
         {
             _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.IdleState);
         }
+
+        if (isAttacking)
+        {
+            if (_rockGolemBoss.EnemyTriggerController.EnemyTriggerDetector.IsEnemyTriggeredToBeAttacked())
+            {
+                Debug.Log("attack");
+                isAttacking = false;
+            }
+        }
     }
 
     public override void ExitState()
     {
         base.ExitState();
-    }
-
-    private IEnumerator Attack()
-    {
-        CanChangeState = false;
-        _rockGolemBoss.EnemyAttackController.AttackStarted();
-        if (_rockGolemBoss.EnemyTriggerController.EnemyTriggerDetector.IsEnemyTriggeredToBeAttacked())
-        {
-            Debug.Log("attack");
-        }
-        yield return new WaitForSeconds(2);
-        _rockGolemBoss.EnemyAttackController.AttackFinished();
-        CanChangeState = true;
     }
 }

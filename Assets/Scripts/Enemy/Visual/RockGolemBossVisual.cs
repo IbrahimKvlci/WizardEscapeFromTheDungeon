@@ -8,6 +8,11 @@ public class RockGolemBossVisual : MonoBehaviour
     public event EventHandler OnGetRock;
     public event EventHandler OnThrowRock;
     public event EventHandler OnThrowingFinished;
+    public event EventHandler OnEarthquakeStarted;
+    public event EventHandler OnEarthquakeFinished;
+    public event EventHandler OnPunchStarted;
+    public event EventHandler OnPunchFinished;
+    public event EventHandler OnPunchAnimationFinished;
 
     [SerializeField] private RockGolemBoss rockGolemBoss;
     [SerializeField] private Animator animator;
@@ -65,7 +70,7 @@ public class RockGolemBossVisual : MonoBehaviour
     {
         animator.SetBool(rockGolemBossAnimationEnum.ToString(), value);
     }
-
+    #region ThrowingRockEventFuntions
     private void GetRock()
     {
         OnGetRock?.Invoke(this, EventArgs.Empty);
@@ -78,4 +83,29 @@ public class RockGolemBossVisual : MonoBehaviour
     {
         OnThrowingFinished?.Invoke(this, EventArgs.Empty);
     }
+    #endregion
+    #region EarthquakeEventFunctions
+    private void EarthquakeStarted()
+    {
+        OnEarthquakeStarted?.Invoke(this, EventArgs.Empty);
+    }
+    private void EarthquakeFinished()
+    {
+        OnEarthquakeFinished?.Invoke(this, EventArgs.Empty);
+    }
+    #endregion
+    #region PunchEventFunctions
+    private void PunchStarted()
+    {
+        OnPunchStarted?.Invoke(this, EventArgs.Empty);
+    }
+    private void PunchFinished()
+    {
+        OnPunchFinished?.Invoke(this, EventArgs.Empty);
+    }
+    private void PunchAnimationFinished()
+    {
+        OnPunchAnimationFinished?.Invoke(this, EventArgs.Empty);
+    }
+    #endregion
 }
