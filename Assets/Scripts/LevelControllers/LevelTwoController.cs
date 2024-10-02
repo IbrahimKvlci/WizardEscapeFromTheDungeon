@@ -7,7 +7,8 @@ public class LevelTwoController : MonoBehaviour
 
     [SerializeField] private List<Torch> torchList;
     [SerializeField] private List<int> torchNumberList;
-    [SerializeField] private Door doorWithTorch;
+    [SerializeField] private Door doorWithTorch,triggerEnemyBossDoor;
+    [SerializeField] private RockGolemBoss rockGolemBossEnemy;
 
     private bool isDoorOpened;
 
@@ -19,6 +20,12 @@ public class LevelTwoController : MonoBehaviour
         {
             torch.ExtinguishTheTorch();
         }
+        triggerEnemyBossDoor.OnDoorIsOpened += TriggerEnemyBossDoor_OnDoorIsOpened;
+    }
+
+    private void TriggerEnemyBossDoor_OnDoorIsOpened(object sender, System.EventArgs e)
+    {
+        rockGolemBossEnemy.CanAttack= true;
     }
 
     private void Update()

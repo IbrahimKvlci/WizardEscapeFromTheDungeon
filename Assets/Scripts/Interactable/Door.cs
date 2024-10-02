@@ -11,6 +11,8 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField] private Quaternion newRotation;
     [SerializeField] private float doorOpenTimerMax;
 
+    [SerializeField] private bool isDoorLocked;
+
     private Quaternion oldRotation;
     private bool isDoorOpening;
     private bool isDoorOpen;
@@ -47,10 +49,19 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (Player.Instance.PlayerCollectItemController.KeyCount > 0&&!isDoorOpen)
+        if (isDoorLocked)
+        {
+            if (Player.Instance.PlayerCollectItemController.KeyCount > 0 && !isDoorOpen)
+            {
+                OpenDoor();
+                Player.Instance.PlayerCollectItemController.KeyCount--;
+                isDoorLocked=false;
+            }
+        }
+        else
         {
             OpenDoor();
-            Player.Instance.PlayerCollectItemController.KeyCount--;
         }
+        
     }
 }

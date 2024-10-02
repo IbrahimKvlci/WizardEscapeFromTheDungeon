@@ -12,8 +12,11 @@ public class Rock : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player))
         {
-            if(CanDamage)
+            if (CanDamage)
+            {
                 player.PlayerHealth.TakeDamage(damage);
+                player.StartCoroutine(player.StunPlayerWithSpecificTime(3));
+            }
         }
     }
 }

@@ -105,4 +105,11 @@ public class Player : MonoBehaviour
         PlayerMovementController.CanMove = value;
         PlayerAttackController.CanAttack = value;
     }
+
+    public IEnumerator StunPlayerWithSpecificTime(float seconds)
+    {
+        IsStunned = true;
+        yield return new WaitForSeconds(seconds);
+        IsStunned = false;
+    }
 }

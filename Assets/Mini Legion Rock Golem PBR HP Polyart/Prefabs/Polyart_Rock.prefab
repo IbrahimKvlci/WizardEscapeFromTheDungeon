@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5599028697635640829}
   - component: {fileID: 1882749022946428489}
   - component: {fileID: -1549090509772423565}
+  - component: {fileID: 2071816860966836199}
   m_Layer: 0
   m_Name: Polyart_Rock
   m_TagString: Untagged
@@ -97,3 +98,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 100
+--- !u!65 &2071816860966836199
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5298590762127773683}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.3865008, y: 1.9903375, z: 1.808518}
+  m_Center: {x: 0, y: 0, z: 0}

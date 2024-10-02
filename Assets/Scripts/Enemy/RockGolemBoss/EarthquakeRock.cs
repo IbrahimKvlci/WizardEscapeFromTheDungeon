@@ -39,6 +39,7 @@ public class EarthquakeRock : MonoBehaviour
         {
             //Damage
             player.PlayerHealth.TakeDamage(damage);
+            player.StartCoroutine(player.StunPlayerWithSpecificTime(3));
         }
     }
 }

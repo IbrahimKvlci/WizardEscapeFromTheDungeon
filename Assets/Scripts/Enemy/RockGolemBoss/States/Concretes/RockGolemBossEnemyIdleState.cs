@@ -17,18 +17,20 @@ public class RockGolemBossEnemyIdleState : RockGolemBossEnemyStateBase
     public override void UpdateState()
     {
         base.UpdateState();
-
-        if (_rockGolemBoss.EnemyTriggerController.IsPlayerTriggeredToBePreparedForAttack())
+        if (_rockGolemBoss.CanAttack)
         {
-            _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.PunchState);
-        }
-        else if (_rockGolemBoss.ThrowRockTimer >= 20 && Vector3.Distance(_rockGolemBoss.transform.position, Player.Instance.transform.position) >= 0)
-        {
-            _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.ThrowRockState);
-        }
-        else
-        {
-            _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.ChaseState);
+            if (_rockGolemBoss.EnemyTriggerController.IsPlayerTriggeredToBePreparedForAttack())
+            {
+                _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.PunchState);
+            }
+            else if (_rockGolemBoss.ThrowRockTimer >= 20 && Vector3.Distance(_rockGolemBoss.transform.position, Player.Instance.transform.position) >= 0)
+            {
+                _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.ThrowRockState);
+            }
+            else
+            {
+                _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.ChaseState);
+            }
         }
     }
 }
