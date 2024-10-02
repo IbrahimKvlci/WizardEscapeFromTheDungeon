@@ -22,7 +22,8 @@ public class RockGolemBossEnemyStateManager : IRockGolemBossEnemyStateService
         }
         else
         {
-            Debug.LogError("You cannot change state");
+
+            Debug.LogError($"You cannot change state current state:{CurrentState}");
         }
     }
 }

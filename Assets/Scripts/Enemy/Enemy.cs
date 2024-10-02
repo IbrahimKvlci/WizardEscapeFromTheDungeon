@@ -16,7 +16,20 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private Transform holdableObjectList;
 
+    private bool _isStunned;
+    public bool IsStunned
+    {
+        get
+        {
+            return _isStunned;
+        }
+        set
+        {
+            _isStunned = value;
 
+            SetStunEnemy(value);
+        }
+    }
 
 
 
@@ -42,6 +55,23 @@ public class Enemy : MonoBehaviour
         {
             holdableObject.gameObject.GetComponent<IHoldable>().Drop();
         }
+    }
+
+    private void SetStunEnemy(bool value)
+    {
+        EnemyMovementController.SetMovement(!value);
+        EnemyAttackController.CanAttack = !value;
+    }
+
+    public IEnumerator StunEnemyWithSpecificTime(float seconds)
+    {
+        IsStunned= true;
+        Debug.Log("stunned");
+        yield return new WaitForSeconds(seconds);
+        IsStunned = false;
+        Debug.Log("not stunned");
+
+        Debug.Log(EnemyMovementController.CanMove);
     }
 
 }

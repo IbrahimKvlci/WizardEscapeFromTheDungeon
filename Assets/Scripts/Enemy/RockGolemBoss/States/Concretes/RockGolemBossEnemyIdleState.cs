@@ -17,7 +17,7 @@ public class RockGolemBossEnemyIdleState : RockGolemBossEnemyStateBase
     public override void UpdateState()
     {
         base.UpdateState();
-        if (_rockGolemBoss.CanAttack)
+        if (_rockGolemBoss.EnemyAttackController.CanAttack)
         {
             if (_rockGolemBoss.EnemyTriggerController.IsPlayerTriggeredToBePreparedForAttack())
             {

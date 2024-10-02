@@ -25,7 +25,7 @@ public class LevelTwoController : MonoBehaviour
 
     private void TriggerEnemyBossDoor_OnDoorIsOpened(object sender, System.EventArgs e)
     {
-        rockGolemBossEnemy.CanAttack= true;
+        rockGolemBossEnemy.EnemyAttackController.CanAttack = true;
     }
 
     private void Update()

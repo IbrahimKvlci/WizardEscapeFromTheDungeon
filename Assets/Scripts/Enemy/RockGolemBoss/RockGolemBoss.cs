@@ -13,7 +13,6 @@ public class RockGolemBoss : Enemy
 
     public float EarthquakeTimer {  get; set; }
     public float ThrowRockTimer { get; set; }
-    public bool CanAttack { get; set; }
 
     public IRockGolemBossEnemyState IdleState {  get; set; }
     public IRockGolemBossEnemyState ChaseState { get; set; }
@@ -40,7 +39,7 @@ public class RockGolemBoss : Enemy
     protected override void Start()
     {
         base.Start();
-        CanAttack = false;
+        EnemyAttackController.CanAttack = false;
         _rockGolemBossEnemyStateService.Initialize(IdleState);
     }
 

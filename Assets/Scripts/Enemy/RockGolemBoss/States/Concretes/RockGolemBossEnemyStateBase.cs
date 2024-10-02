@@ -25,12 +25,18 @@ public class RockGolemBossEnemyStateBase : IRockGolemBossEnemyState
 
     public virtual void UpdateState()
     {
-        if(_rockGolemBossEnemyStateService.CurrentState is not RockGolemBossEnemyEarthquakeState)
+        if(_rockGolemBossEnemyStateService.CurrentState is not RockGolemBossEnemyEarthquakeState&&_rockGolemBoss.EnemyAttackController.CanAttack)
         {
             if (_rockGolemBoss.EarthquakeTimer >= 15)
             {
                 _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.EarthquakeState);
             }
+        }
+
+        if (_rockGolemBoss.IsStunned)
+        {
+            CanChangeState = true;
+            _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.IdleState);
         }
     }
 }

@@ -16,6 +16,7 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField] private Transform magicFireLoc;
     public Enemy TargetEnemy { get; set; }
     public MagicBase Magic { get; set; }
+    private MagicBase justAttackedMagic;
 
 
     [field:Header("AttackSettings")]
@@ -28,6 +29,9 @@ public class PlayerAttackController : MonoBehaviour
     [field:Header("Index")]
     private int targetEnemyIndex;
     private int magicIndex;
+
+    [field: Header("Counters")]
+    private float stunMagicTimer;
 
 
 
@@ -53,6 +57,7 @@ public class PlayerAttackController : MonoBehaviour
         magicIndex = 0;
         Magic = magicList[magicIndex];
         CanAttack = true;
+        stunMagicTimer = 0;
     }
 
     private void _inputService_OnSwitchMagicPressed(object sender, IInputService.OnSwitchMagicPressedEventArgs e)
@@ -98,24 +103,43 @@ public class PlayerAttackController : MonoBehaviour
             TargetEnemy = TargetEnemyList[targetEnemyIndex];
         }
         #endregion
+
+        if (justAttackedMagic != null)
+        {
+            stunMagicTimer += Time.deltaTime;
+            if (stunMagicTimer >= 2)
+            {
+                stunMagicTimer = 0;
+                justAttackedMagic= null;
+            }
+        }
     }
 
     public IEnumerator Attack(Enemy enemy)
     {
         IsAttacking = true;
         OnAttack?.Invoke(this, EventArgs.Empty);
-
+        HandleEnemyStunMagic(enemy);
         player.PlayerMovementController.CanMove = false;
 
         MagicBase magicBase = Instantiate(Magic.MagicSO.prefab, magicFireLoc.transform.position, Quaternion.identity).GetComponent<MagicBase>();
         magicBase.TargetObject = enemy.gameObject;
         magicBase.MagicTimerMax = AttackTimerMax;
-
+        justAttackedMagic = Magic;
         magicFreezeTimerList[magicIndex] = 0;
         yield return new WaitForSeconds(AttackTimerMax);
         enemy.EnemyHealth.TakeDamage(Damage);
         player.PlayerMovementController.CanMove = true;
         Debug.Log("Attacked" + enemy.name);
         IsAttacking = false;
+    }
+
+    private void HandleEnemyStunMagic(Enemy enemy)
+    {
+        if(justAttackedMagic is FireMagic && Magic is IceMagic)
+        {
+            Debug.Log("Stun");
+            enemy.StartCoroutine(enemy.StunEnemyWithSpecificTime(10));
+        }
     }
 }
