@@ -23,12 +23,12 @@ public class Torch : MonoBehaviour, IMagicInteractable
             LightTheTorch();
     }
 
-    private void LightTheTorch()
+    public void LightTheTorch()
     {
         lightObject.SetActive(true);
         isTorchLighted = true;
     }
-    private void ExtinguishTheTorch()
+    public void ExtinguishTheTorch()
     {
         lightObject.SetActive(false);
         isTorchLighted = false;

@@ -38,7 +38,7 @@ public class EarthquakeRock : MonoBehaviour
         if(other.TryGetComponent<Player>(out Player player))
         {
             //Damage
-            Debug.Log("Damaged Player");
+            player.PlayerHealth.TakeDamage(damage);
         }
     }
 }

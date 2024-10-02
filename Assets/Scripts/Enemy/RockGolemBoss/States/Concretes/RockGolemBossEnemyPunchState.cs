@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RockGolemBossEnemyPunchState : RockGolemBossEnemyStateBase
 {
-    private float timer,attackTimer;
-    private bool isAttacking,attackAnimFinished;
+    private float timer, attackTimer;
+    private bool isAttacking, attackAnimFinished;
 
     public RockGolemBossEnemyPunchState(RockGolemBoss rockGolemBoss, IRockGolemBossEnemyStateService rockGolemBossEnemyStateService) : base(rockGolemBoss, rockGolemBossEnemyStateService)
     {
@@ -48,7 +48,7 @@ public class RockGolemBossEnemyPunchState : RockGolemBossEnemyStateBase
         if (_rockGolemBoss.EnemyTriggerController.IsPlayerTriggeredToBeAttacked())
         {
             //Player triggered
-            if (timer >= _rockGolemBoss.EnemySO.enemyAimAttackTimerMax&&attackAnimFinished)
+            if (timer >= _rockGolemBoss.EnemySO.enemyAimAttackTimerMax && attackAnimFinished)
             {
                 timer = 0;
                 //Punch
@@ -75,7 +75,7 @@ public class RockGolemBossEnemyPunchState : RockGolemBossEnemyStateBase
         {
             if (_rockGolemBoss.EnemyTriggerController.EnemyTriggerDetector.IsEnemyTriggeredToBeAttacked())
             {
-                Debug.Log("attack");
+                Player.Instance.PlayerHealth.TakeDamage(_rockGolemBoss.EnemySO.enemyDamage);
                 isAttacking = false;
             }
         }

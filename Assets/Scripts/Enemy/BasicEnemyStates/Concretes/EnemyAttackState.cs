@@ -26,14 +26,14 @@ public class EnemyAttackState : EnemyStateBase
     public override void UpdateState()
     {
         base.UpdateState();
-        if (_enemy.EnemyTriggerController.EnemyTriggerDetector.IsEnemyTriggeredToBeAttacked()&&!isAttacked)
+        if (_enemy.EnemyTriggerController.EnemyTriggerDetector.IsEnemyTriggeredToBeAttacked() && !isAttacked)
         {
-            Debug.Log("Attack");
-            isAttacked= true;
+            Player.Instance.PlayerHealth.TakeDamage(_enemy.EnemySO.enemyDamage);
+            isAttacked = true;
         }
 
         timer += Time.deltaTime;
-        if(timer>=2)
+        if (timer >= 2)
             _enemyStateService.SwitchState(_enemy.EnemyAimState);
     }
 

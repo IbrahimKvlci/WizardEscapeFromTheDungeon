@@ -45,6 +45,7 @@ public class RockGolemBossEnemyThrowRockState : RockGolemBossEnemyStateBase
         firstThrowRockLocation = rockObject.transform.position;
         firstPlayerLocation = Player.Instance.transform.position;
         isRockThrowed= true;
+        rockObject.GetComponent<Rock>().CanDamage = true;
     }
 
     private void RockGolemBossVisual_OnGetRock(object sender, EventArgs e)
@@ -67,6 +68,7 @@ public class RockGolemBossEnemyThrowRockState : RockGolemBossEnemyStateBase
             {
                 isRockThrowed = false;
                 CanChangeState = true;
+                rockObject.GetComponent<Rock>().CanDamage = false;
                 _rockGolemBossEnemyStateService.SwitchState(_rockGolemBoss.IdleState);
             }
         }

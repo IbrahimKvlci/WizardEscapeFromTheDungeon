@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8335719862822002411}
   - component: {fileID: 4222040985689547426}
   - component: {fileID: 880886853243513927}
-  - component: {fileID: 3842559486568918092}
+  - component: {fileID: 5941367091293449475}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -108,7 +108,7 @@ Halo:
     serializedVersion: 2
     rgba: 4283814655
   m_Size: 0.3
---- !u!114 &3842559486568918092
+--- !u!114 &5941367091293449475
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,7 +165,7 @@ Transform:
   m_Children:
   - {fileID: 8335719862822002411}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8742005620342582154
 MeshFilter:
