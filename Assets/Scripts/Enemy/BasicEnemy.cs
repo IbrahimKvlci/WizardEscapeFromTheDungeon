@@ -7,6 +7,7 @@ public class BasicEnemy : Enemy
 {
     public Action IdleEnemyAction { get; set; }
 
+    [field:SerializeField] public BasicEnemyVisual BasicEnemyVisual {  get; set; }
 
     public IEnemyState EnemyIdleState { get; set; }
     public IEnemyState EnemyChaseState { get; set; }

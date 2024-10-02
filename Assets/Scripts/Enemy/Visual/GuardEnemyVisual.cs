@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuardEnemyVisual : MonoBehaviour
+public class GuardEnemyVisual : BasicEnemyVisual
 {
     [SerializeField] private GuardEnemy enemy;
     [SerializeField] private Animator animator;

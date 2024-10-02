@@ -19,6 +19,8 @@ public class PlayerHealth : MonoBehaviour
         {
             DestroyPlayer();
         }
+
+        Debug.Log("Damaged");
     }
 
     private void DestroyPlayer()

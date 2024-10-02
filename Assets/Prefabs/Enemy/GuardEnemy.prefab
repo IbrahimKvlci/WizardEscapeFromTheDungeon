@@ -53,8 +53,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 12.14, y: 216.37817, z: 5}
-  m_Center: {x: 0.00011260806, y: -60.74223, z: -0.00003368861}
+  m_Size: {x: 12.14, y: 300, z: 5}
+  m_Center: {x: 0.00011260806, y: -98.4, z: -0.00003368861}
 --- !u!114 &5629685267194118504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a208f8ae5e2304789807ba5659f543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxCollider: {fileID: 8386318750551598722}
+  _collider: {fileID: 8386318750551598722}
   enemy: {fileID: 3634476698503865216}
 --- !u!54 &6378404042904808594
 Rigidbody:
@@ -137,7 +137,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8934732934600803005}
-  - component: {fileID: 8934732934600803004}
   m_Layer: 0
   m_Name: FootmanPolyart
   m_TagString: Untagged
@@ -162,27 +161,6 @@ Transform:
   m_Father: {fileID: 1673387209491178270}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &8934732934600803004
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8934732934600802995}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 84b42445372ad5347aebd5d216a95d4f, type: 3}
-  m_Controller: {fileID: 9100000, guid: 483e9d88996763841a2bb55c30c3477a, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8934732934679529355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,7 +1014,7 @@ PrefabInstance:
     - target: {fileID: 8711691575367920135, guid: f1c37e1c5668e354391fce695f28e910,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8711691575367920135, guid: f1c37e1c5668e354391fce695f28e910,
         type: 3}
@@ -1108,6 +1086,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5881098046386706406}
+    - targetCorrespondingSourceObject: {fileID: 2690440960106938526, guid: f1c37e1c5668e354391fce695f28e910,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3068611857449508830}
   m_SourcePrefab: {fileID: 100100000, guid: f1c37e1c5668e354391fce695f28e910, type: 3}
 --- !u!1 &149849577721196772 stripped
 GameObject:
@@ -1128,7 +1110,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 3634476698503865216}
-  animator: {fileID: 8934732934600803004}
+  animator: {fileID: 3068611857449508830}
+--- !u!95 &3068611857449508830
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149849577721196772}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 84b42445372ad5347aebd5d216a95d4f, type: 3}
+  m_Controller: {fileID: 9100000, guid: 483e9d88996763841a2bb55c30c3477a, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1280846942510931176 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3928398004214033554, guid: f1c37e1c5668e354391fce695f28e910,
@@ -1153,6 +1156,8 @@ MonoBehaviour:
   <EnemyAttackController>k__BackingField: {fileID: 3546912706702639103}
   <EnemyMovementController>k__BackingField: {fileID: 3215573961054726760}
   <EnemyTriggerController>k__BackingField: {fileID: 2579105600859906871}
+  holdableObjectList: {fileID: 0}
+  <BasicEnemyVisual>k__BackingField: {fileID: 5881098046386706406}
   <EnemyIdle>k__BackingField: 1
 --- !u!195 &7937443012937926983
 NavMeshAgent:
