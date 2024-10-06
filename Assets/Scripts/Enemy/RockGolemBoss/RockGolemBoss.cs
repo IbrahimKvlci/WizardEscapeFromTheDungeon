@@ -8,6 +8,7 @@ public class RockGolemBoss : Enemy
     [SerializeField] public Transform rockLocation;
     [SerializeField] public GameObject earthquakeRockPrefab;
     [SerializeField] public GameObject earthquakeRockMarkerPrefab;
+    [SerializeField] public LayerMask floorLayer;
 
     [field:SerializeField] public RockGolemBossVisual RockGolemBossVisual {  get; set; }
 

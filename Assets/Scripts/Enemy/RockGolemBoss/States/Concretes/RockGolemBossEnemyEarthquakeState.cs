@@ -52,6 +52,10 @@ public class RockGolemBossEnemyEarthquakeState : RockGolemBossEnemyStateBase
     private IEnumerator CreateRock()
     {
         Vector3 playerPos = Player.Instance.transform.position;
+        if (Physics.Raycast(Player.Instance.transform.position,Vector3.down,out RaycastHit hitInfo, 100f,_rockGolemBoss.floorLayer))
+        {
+            playerPos= hitInfo.point;
+        }
         GameObject marker= GameObject.Instantiate(_rockGolemBoss.earthquakeRockMarkerPrefab, playerPos, Quaternion.identity);
         yield return new WaitForSeconds(0.5f);
         GameObject.Destroy(marker);

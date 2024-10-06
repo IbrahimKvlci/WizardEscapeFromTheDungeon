@@ -44,7 +44,11 @@ public class RockGolemBossEnemyThrowRockState : RockGolemBossEnemyStateBase
     {
         firstThrowRockLocation = rockObject.transform.position;
         firstPlayerLocation = Player.Instance.transform.position;
-        isRockThrowed= true;
+        if (Physics.Raycast(Player.Instance.transform.position, Vector3.down, out RaycastHit hitInfo, 100f, _rockGolemBoss.floorLayer))
+        {
+            firstPlayerLocation = hitInfo.point;
+        }
+        isRockThrowed = true;
         rockObject.GetComponent<Rock>().CanDamage = true;
     }
 
