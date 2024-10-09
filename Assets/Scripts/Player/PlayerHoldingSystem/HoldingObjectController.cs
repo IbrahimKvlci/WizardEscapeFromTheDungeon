@@ -60,6 +60,7 @@ public class HoldingObjectController : MonoBehaviour
             if (hitInfo.transform.TryGetComponent(out IHoldable holdable))
             {
                 //Holdable Object Found
+                Debug.Log(hitInfo.transform.name);
                 if (HoldingObject != hitInfo.transform.gameObject)
                     holdable.SetColor(Color.green);
                 if (_inputService.HoldObjectButtonPressed() && HoldingObject != hitInfo.transform.gameObject)
@@ -71,13 +72,18 @@ public class HoldingObjectController : MonoBehaviour
                     holdable.Hold(holdPosTransform);
                     firstFrameAfterHold = false;
                 }
+                if(lastCastedHoldableObject!= null&&lastCastedHoldableObject!=holdable)
+                {
+                    lastCastedHoldableObject.SetColor(Color.yellow);
+                }
+
                 lastCastedHoldableObject = holdable;
             }
-            else if (lastCastedHoldableObject != null && lastCastedHoldableObject != HoldingObject.GetComponent<IHoldable>())
-            {
-                lastCastedHoldableObject.SetColor(Color.yellow);
-                lastCastedHoldableObject = null;
-            }
+            //else if (lastCastedHoldableObject != null && lastCastedHoldableObject != HoldingObject.GetComponent<IHoldable>())
+            //{
+            //    lastCastedHoldableObject.SetColor(Color.yellow);
+            //    lastCastedHoldableObject = null;
+            //}
         }
         else if (lastCastedHoldableObject != null)
         {
