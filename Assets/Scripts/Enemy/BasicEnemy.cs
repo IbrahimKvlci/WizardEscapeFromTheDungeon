@@ -44,4 +44,10 @@ public class BasicEnemy : Enemy
         _enemyStateService.CurrentEnemyState.UpdateState();
 
     }
+
+    public virtual void Attack(out bool isAttacking)
+    {
+        isAttacking = false;
+        Debug.LogError("Base class attack method");
+    }
 }

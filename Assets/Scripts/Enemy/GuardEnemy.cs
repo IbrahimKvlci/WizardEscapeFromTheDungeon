@@ -47,6 +47,16 @@ public class GuardEnemy : BasicEnemy
         }
     }
 
+    public override void Attack(out bool isAttacking)
+    {
+        isAttacking = true;
+        if (this.EnemyTriggerController.EnemyTriggerDetector.IsEnemyTriggeredToBeAttacked())
+        {
+            Player.Instance.PlayerHealth.TakeDamage(this.EnemySO.enemyDamage);
+            isAttacking = false;    
+        }
+    }
+
     private void IdleSleep()
     {
         Debug.Log("Sleeping");

@@ -45,11 +45,7 @@ public class EnemyAttackState : EnemyStateBase
         base.UpdateState();
         if(isAttacking)
         {
-            if (_enemy.EnemyTriggerController.EnemyTriggerDetector.IsEnemyTriggeredToBeAttacked())
-            {
-                Player.Instance.PlayerHealth.TakeDamage(_enemy.EnemySO.enemyDamage);
-                isAttacking = false;
-            }
+            _enemy.Attack(out isAttacking);
         }
 
         Debug.Log(isAttacking);
