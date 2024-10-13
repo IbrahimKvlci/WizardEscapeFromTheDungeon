@@ -59,7 +59,6 @@ public class GuardEnemy : BasicEnemy
 
     private void IdleSleep()
     {
-        Debug.Log("Sleeping");
         if (!IsSleeping)
         {
             IdleEnemyAction = IdleStand;
@@ -68,6 +67,5 @@ public class GuardEnemy : BasicEnemy
 
     private void IdleStand()
     {
-        Debug.Log("Stay Stand");
     }
 }

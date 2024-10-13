@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     [field: SerializeField] public Dashing Dashing { get; set; }
     [field: SerializeField] public PlayerMagicInteractController PlayerMagicInteractController { get; set; }
     [field:SerializeField] public GameObject WandObject { get; set; }
+    [field:SerializeField] public Transform EnemyTargetTransform { get; set; }
     [SerializeField] private GameObject MagicLocationWithWand;
     [SerializeField] private GameObject MagicLocationWithoutWand;
     public GameObject MagicLocation

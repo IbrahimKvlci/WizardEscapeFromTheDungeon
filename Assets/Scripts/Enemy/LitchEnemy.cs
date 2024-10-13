@@ -11,7 +11,7 @@ public class LitchEnemy : BasicEnemy
     {
         LitchEnemyAttackMagic litchEnemyAttackMagic = Instantiate(litchEnemyAttackMagicPrefab,magicPos.transform.position,Quaternion.identity).GetComponent<LitchEnemyAttackMagic>();
         litchEnemyAttackMagic.Damage = EnemySO.enemyDamage;
-        litchEnemyAttackMagic.GiveVelocity((Player.Instance.transform.position-litchEnemyAttackMagic.transform.position).normalized);
+        litchEnemyAttackMagic.GiveVelocity((Player.Instance.EnemyTargetTransform.position-litchEnemyAttackMagic.transform.position).normalized);
 
         isAttacking = false;
     }
