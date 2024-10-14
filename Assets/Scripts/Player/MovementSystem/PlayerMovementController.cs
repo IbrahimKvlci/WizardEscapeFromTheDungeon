@@ -16,6 +16,12 @@ public class PlayerMovementController : MonoBehaviour
     private IPlayerMovementService _playerMovementService;
     private IInputService _inputService;
 
+    [field: Header("Climbing")]
+    [SerializeField] private Transform orientation;
+    [SerializeField] private LayerMask ladderLayer;
+    [SerializeField] private float climbSpeed;
+    [SerializeField] private float climbDistance;
+
     [field:Header("Jumping")]
     [field: SerializeField] public float JumpSpeed { get; set; }
     private bool _grounded;
@@ -107,6 +113,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             IsFalling = true;
         }
+        HandleClimbLedder();
 
     }
 
@@ -144,6 +151,18 @@ public class PlayerMovementController : MonoBehaviour
             toRotationVisual.x = 0;
             toRotationVisual.z=0;
             player.PlayerVisualController.transform.rotation = Quaternion.RotateTowards(player.PlayerVisualController.transform.rotation, toRotationVisual, 720 * Time.deltaTime);
+        }
+    }
+
+    private void HandleClimbLedder()
+    {
+        if (Physics.Raycast(transform.position, orientation.transform.forward, climbDistance, ladderLayer))
+        {
+            if (_inputService.GetMovementVector().y > 0)
+            {
+                player.transform.Translate(new Vector3(0, climbSpeed*Time.deltaTime, 0));
+            }
+            Debug.Log("climb"+_inputService.GetMovementVector().y);
         }
     }
 

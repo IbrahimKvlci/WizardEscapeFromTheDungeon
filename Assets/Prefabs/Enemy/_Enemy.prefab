@@ -169,6 +169,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
+  <EnemyTriggerDetector>k__BackingField: {fileID: 0}
 --- !u!1 &3928398004214033554
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,7 +179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8711691575367920135}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: _Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +205,7 @@ Transform:
   - {fileID: 5026689363452349530}
   - {fileID: 5037149363034519372}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6069249270076712721
 GameObject:
@@ -250,6 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7678c3209ce55a143bfa6a6e10bddb63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
 --- !u!1 &7871238947477916335
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8850725870678021429
 Transform:
   m_ObjectHideFlags: 0

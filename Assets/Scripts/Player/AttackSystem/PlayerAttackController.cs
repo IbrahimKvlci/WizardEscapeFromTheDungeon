@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerAttackController : MonoBehaviour
@@ -23,6 +24,8 @@ public class PlayerAttackController : MonoBehaviour
     [field: SerializeField] public float Damage;
     [field: SerializeField] public float AttackTimerMax;
     [field: SerializeField] public float AttackFreezeTimerMax;
+    [SerializeField] private float maxDistance;
+    [SerializeField] private LayerMask enemyLayer;
     public bool CanAttack { get; set; }
     public bool IsAttacking { get; set; }
 
@@ -101,6 +104,23 @@ public class PlayerAttackController : MonoBehaviour
         else
         {
             TargetEnemy = TargetEnemyList[targetEnemyIndex];
+        }
+        #endregion
+        #region TriggerEnemies
+        TargetEnemyList.Clear();
+        List<RaycastHit> hitList = Physics.BoxCastAll(Camera.main.transform.position, new Vector3(3, 3, 3), Camera.main.transform.forward, Camera.main.transform.rotation, maxDistance, enemyLayer).ToList<RaycastHit>();
+        if(hitList.Count > 0 )
+        {
+            Debug.Log("hit");
+            foreach (RaycastHit hitObject in hitList)
+            {
+                if (hitObject.transform.TryGetComponent<Enemy>(out Enemy enemy))
+                {
+                    if(!enemy.EnemyHealth.IsDead)
+                        TargetEnemyList.Add(enemy);
+                }
+                Debug.Log(hitObject.transform.name);
+            }
         }
         #endregion
 

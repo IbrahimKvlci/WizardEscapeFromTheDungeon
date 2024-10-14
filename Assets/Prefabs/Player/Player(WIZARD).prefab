@@ -129,6 +129,10 @@ MonoBehaviour:
   Damage: 4
   AttackTimerMax: 1
   AttackFreezeTimerMax: 3
+  maxDistance: 10
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!1 &2814609283561888427
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,6 +618,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 7942368593129203756}
   camera: {fileID: 0}
+  orientation: {fileID: 0}
+  ladderLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  climbSpeed: 0
+  climbDistance: 0
   <JumpSpeed>k__BackingField: 5
   <Speed>k__BackingField: 5
 --- !u!65 &2648764747549478133
