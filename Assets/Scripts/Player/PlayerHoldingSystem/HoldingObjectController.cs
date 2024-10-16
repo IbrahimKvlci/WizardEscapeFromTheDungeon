@@ -55,7 +55,7 @@ public class HoldingObjectController : MonoBehaviour
     private void Update()
     {
         firstFrameAfterHold = true;
-        if (Physics.BoxCast(Camera.main.transform.position, new Vector3(1, 1, 1), Camera.main.transform.forward, out RaycastHit hitInfo, Camera.main.transform.rotation, rayLength, layer))
+        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f)), out RaycastHit hitInfo, rayLength, layer))
         {
             if (hitInfo.transform.TryGetComponent(out IHoldable holdable))
             {

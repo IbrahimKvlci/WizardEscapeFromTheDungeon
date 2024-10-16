@@ -21690,17 +21690,17 @@ PrefabInstance:
     - target: {fileID: 537174867180188529, guid: edfa08e465127c2458d3cb2095367187,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.47575808
+      value: 0.4757576
       objectReference: {fileID: 0}
     - target: {fileID: 537174867180188529, guid: edfa08e465127c2458d3cb2095367187,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.719136
+      value: 2.7191353
       objectReference: {fileID: 0}
     - target: {fileID: 537174867180188529, guid: edfa08e465127c2458d3cb2095367187,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.9409552
+      value: -1.9409556
       objectReference: {fileID: 0}
     - target: {fileID: 537174867180188529, guid: edfa08e465127c2458d3cb2095367187,
         type: 3}
@@ -21736,26 +21736,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1177754993827058221, guid: edfa08e465127c2458d3cb2095367187,
-        type: 3}
-      propertyPath: m_Damping
-      value: 1.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 1177754993827058221, guid: edfa08e465127c2458d3cb2095367187,
-        type: 3}
-      propertyPath: m_Strategy
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1177754993827058221, guid: edfa08e465127c2458d3cb2095367187,
-        type: 3}
-      propertyPath: m_CollideAgainst.m_Bits
-      value: 2048
-      objectReference: {fileID: 0}
-    - target: {fileID: 1177754993827058221, guid: edfa08e465127c2458d3cb2095367187,
-        type: 3}
-      propertyPath: m_MinimumDistanceFromTarget
-      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 5140962502097166270, guid: edfa08e465127c2458d3cb2095367187,
         type: 3}
@@ -63707,12 +63687,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1203126257}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1852057371 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5284708330264289219, guid: 7cd1d8de15ab7e24684b1b5bfd84facf,
-    type: 3}
-  m_PrefabInstance: {fileID: 3493145224697337986}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1852325770 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4665435741668496601, guid: b4bf0e370e49383488ca02efc76f8567,
@@ -73128,7 +73102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5734275028219367401}
   m_LocalRotation: {x: 0.32326594, y: -0, z: -0, w: 0.94630814}
-  m_LocalPosition: {x: 0.42639366, y: 2.3374708, z: -1.7395625}
+  m_LocalPosition: {x: 0.47535324, y: 2.7176733, z: -1.8400412}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -73226,50 +73200,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7807410433631444641}
     m_Modifications:
-    - target: {fileID: 285192951394810721, guid: 7cd1d8de15ab7e24684b1b5bfd84facf,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 874939464072248976, guid: 7cd1d8de15ab7e24684b1b5bfd84facf,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1927312396302079326, guid: 7cd1d8de15ab7e24684b1b5bfd84facf,
         type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 1806844708924770632}
-    - target: {fileID: 1927312396302079326, guid: 7cd1d8de15ab7e24684b1b5bfd84facf,
-        type: 3}
-      propertyPath: climbSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1927312396302079326, guid: 7cd1d8de15ab7e24684b1b5bfd84facf,
-        type: 3}
-      propertyPath: orientation
-      value: 
-      objectReference: {fileID: 1852057371}
-    - target: {fileID: 1927312396302079326, guid: 7cd1d8de15ab7e24684b1b5bfd84facf,
-        type: 3}
-      propertyPath: climbDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1927312396302079326, guid: 7cd1d8de15ab7e24684b1b5bfd84facf,
-        type: 3}
-      propertyPath: ladderLayer.m_Bits
-      value: 4096
-      objectReference: {fileID: 0}
     - target: {fileID: 2814609283561888427, guid: 7cd1d8de15ab7e24684b1b5bfd84facf,
         type: 3}
       propertyPath: m_Name
       value: Player(WIZARD)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4141041781945585823, guid: 7cd1d8de15ab7e24684b1b5bfd84facf,
-        type: 3}
-      propertyPath: layer.m_Bits
-      value: 2176
       objectReference: {fileID: 0}
     - target: {fileID: 4141041781945585823, guid: 7cd1d8de15ab7e24684b1b5bfd84facf,
         type: 3}
@@ -73480,7 +73419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2525924052020040927}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.89, y: 0.01662445, z: 6.85}
+  m_LocalPosition: {x: 19.17, y: 12.78, z: 6.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
