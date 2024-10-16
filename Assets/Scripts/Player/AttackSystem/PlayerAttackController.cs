@@ -8,7 +8,7 @@ public class PlayerAttackController : MonoBehaviour
 {
     public event EventHandler OnAttack;
 
-    [field:Header("References")]
+    [field: Header("References")]
     private IInputService _inputService;
     [SerializeField] private Player player;
     [field: SerializeField] private List<MagicBase> magicList;
@@ -20,7 +20,7 @@ public class PlayerAttackController : MonoBehaviour
     private MagicBase justAttackedMagic;
 
 
-    [field:Header("AttackSettings")]
+    [field: Header("AttackSettings")]
     [field: SerializeField] public float Damage;
     [field: SerializeField] public float AttackTimerMax;
     [field: SerializeField] public float AttackFreezeTimerMax;
@@ -29,7 +29,7 @@ public class PlayerAttackController : MonoBehaviour
     public bool CanAttack { get; set; }
     public bool IsAttacking { get; set; }
 
-    [field:Header("Index")]
+    [field: Header("Index")]
     private int targetEnemyIndex;
     private int magicIndex;
 
@@ -72,14 +72,14 @@ public class PlayerAttackController : MonoBehaviour
 
     private void Update()
     {
-        if (CanAttack&&player.HasWand)
+        if (CanAttack && player.HasWand)
         {
             #region AttackTimer
             if (magicFreezeTimerList[magicIndex] >= Magic.MagicSO.freezeTimerMax)
             {
                 if (_inputService.FireButtonPressed())
                 {
-                    if (TargetEnemyList.Count > 0)
+                    if (TargetEnemy!=null)
                     {
                         StartCoroutine(Attack(TargetEnemy));
                     }
@@ -96,31 +96,29 @@ public class PlayerAttackController : MonoBehaviour
         }
 
         #region SetTargetEnemy
-        if (TargetEnemyList.Count == 0)
+        if(TargetEnemy!=null&&TargetEnemy.EnemyHealth.IsDead)
         {
-            targetEnemyIndex = 0;
             TargetEnemy = null;
+        }
+        #endregion
+        #region TriggerEnemy
+
+
+        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f)),out RaycastHit hitInfo,maxDistance,enemyLayer))
+        {
+            if (hitInfo.transform.TryGetComponent<Enemy>(out Enemy enemy))
+            {
+                if (!enemy.EnemyHealth.IsDead)
+                    TargetEnemy = enemy;
+                else if (TargetEnemy == enemy)
+                    TargetEnemy = null;
+
+            }
+
         }
         else
         {
-            TargetEnemy = TargetEnemyList[targetEnemyIndex];
-        }
-        #endregion
-        #region TriggerEnemies
-        TargetEnemyList.Clear();
-        List<RaycastHit> hitList = Physics.BoxCastAll(Camera.main.transform.position, new Vector3(3, 3, 3), Camera.main.transform.forward, Camera.main.transform.rotation, maxDistance, enemyLayer).ToList<RaycastHit>();
-        if(hitList.Count > 0 )
-        {
-            Debug.Log("hit");
-            foreach (RaycastHit hitObject in hitList)
-            {
-                if (hitObject.transform.TryGetComponent<Enemy>(out Enemy enemy))
-                {
-                    if(!enemy.EnemyHealth.IsDead)
-                        TargetEnemyList.Add(enemy);
-                }
-                Debug.Log(hitObject.transform.name);
-            }
+            TargetEnemy= null;
         }
         #endregion
 
@@ -130,7 +128,7 @@ public class PlayerAttackController : MonoBehaviour
             if (stunMagicTimer >= 2)
             {
                 stunMagicTimer = 0;
-                justAttackedMagic= null;
+                justAttackedMagic = null;
             }
         }
     }
@@ -156,7 +154,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void HandleEnemyStunMagic(Enemy enemy)
     {
-        if(justAttackedMagic is FireMagic && Magic is IceMagic)
+        if (justAttackedMagic is FireMagic && Magic is IceMagic)
         {
             Debug.Log("Stun");
             enemy.StartCoroutine(enemy.StunEnemyWithSpecificTime(10));

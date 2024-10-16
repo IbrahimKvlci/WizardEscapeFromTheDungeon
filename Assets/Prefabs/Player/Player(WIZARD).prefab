@@ -132,7 +132,7 @@ MonoBehaviour:
   maxDistance: 10
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 10240
 --- !u!1 &2814609283561888427
 GameObject:
   m_ObjectHideFlags: 0

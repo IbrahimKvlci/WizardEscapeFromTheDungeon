@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c30489ffa42a0649899aaab857148a3, type: 3}
   m_Name: LitchEnemy
   m_EditorClassIdentifier: 
-  health: 100
+  health: 10
   enemySpeed: 1
   enemyDamage: 5
   enemyAttackRange: 10
+  enemyChaseRange: 5
   enemyAimAttackTimerMax: 3
   enemyAttackTimerMax: 4

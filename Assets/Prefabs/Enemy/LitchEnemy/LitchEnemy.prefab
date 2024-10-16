@@ -120,6 +120,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1564171442432586583}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &5110199188856241981 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6007272719677312106, guid: cc2904f8420d54e45b80616562ff859c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1564171442432586583}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8892689404624261307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -161,7 +167,7 @@ PrefabInstance:
     - target: {fileID: 8711691575367920135, guid: f1c37e1c5668e354391fce695f28e910,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8711691575367920135, guid: f1c37e1c5668e354391fce695f28e910,
         type: 3}
@@ -280,7 +286,7 @@ MonoBehaviour:
   <EnemyAttackController>k__BackingField: {fileID: 7859349918829485886}
   <EnemyMovementController>k__BackingField: {fileID: 8109624169293826729}
   <EnemyTriggerController>k__BackingField: {fileID: 9214925232727278582}
-  holdableObjectList: {fileID: 0}
+  holdableObjectList: {fileID: 5110199188856241981}
   <BasicEnemyVisual>k__BackingField: {fileID: 5461511969596381000}
   litchEnemyAttackMagicPrefab: {fileID: 1326782892934304056, guid: d84fc707dc39da54f82af4958b00acc1,
     type: 3}

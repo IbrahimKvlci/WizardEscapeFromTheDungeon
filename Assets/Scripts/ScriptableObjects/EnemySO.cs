@@ -9,6 +9,7 @@ public class EnemySO : ScriptableObject
     public float enemySpeed;
     public float enemyDamage;
     public float enemyAttackRange;
+    public float enemyChaseRange;
     public float enemyAimAttackTimerMax;
     public float enemyAttackTimerMax;
 }

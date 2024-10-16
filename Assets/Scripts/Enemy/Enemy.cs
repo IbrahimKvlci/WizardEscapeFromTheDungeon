@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private Transform holdableObjectList;
 
+
     private bool _isStunned;
     public bool IsStunned
     {

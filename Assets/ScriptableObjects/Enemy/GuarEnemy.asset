@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c30489ffa42a0649899aaab857148a3, type: 3}
   m_Name: GuarEnemy
   m_EditorClassIdentifier: 
+  health: 0
   enemySpeed: 3
+  enemyDamage: 0
   enemyAttackRange: 1.5
+  enemyChaseRange: 5
   enemyAimAttackTimerMax: 2
   enemyAttackTimerMax: 2

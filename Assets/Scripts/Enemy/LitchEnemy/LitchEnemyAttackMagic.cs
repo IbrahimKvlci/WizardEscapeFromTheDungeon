@@ -20,7 +20,6 @@ public class LitchEnemyAttackMagic : MonoBehaviour
         {
             player.PlayerHealth.TakeDamage(Damage);
         }
-        Debug.Log(other.gameObject.name);
         DestroySelf();
 
     }

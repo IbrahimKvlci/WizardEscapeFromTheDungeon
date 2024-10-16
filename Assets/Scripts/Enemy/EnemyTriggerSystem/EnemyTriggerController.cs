@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyTriggerController : MonoBehaviour
@@ -10,10 +11,24 @@ public class EnemyTriggerController : MonoBehaviour
 
     public bool IsPlayerTriggeredToBePreparedForAttack()
     {
-        return Physics.CheckSphere(enemy.transform.position, enemy.EnemySO.enemyAttackRange-1, layerMask);
+        if (Physics.Raycast(enemy.transform.position, Player.Instance.transform.position - enemy.transform.position, out RaycastHit hitInfo, enemy.EnemySO.enemyAttackRange, layerMask))
+        {
+            if (hitInfo.transform.TryGetComponent<Player>(out Player player))
+                return true;
+        }
+        return false;
     }
     public bool IsPlayerTriggeredToBeAttacked()
     {
         return Physics.Raycast(enemy.transform.position,enemy.transform.forward,enemy.EnemySO.enemyAttackRange, layerMask);
+    }
+    public bool IsPlayerTriggeredToBeChased()
+    {
+        if(Physics.Raycast(enemy.transform.position, Player.Instance.transform.position - enemy.transform.position,out RaycastHit hitInfo, enemy.EnemySO.enemyChaseRange, layerMask))
+        {
+            if (hitInfo.transform.TryGetComponent<Player>(out Player player))
+                return true;
+        }
+        return false;
     }
 }

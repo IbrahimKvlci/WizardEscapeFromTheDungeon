@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e9cea4c99c8494391caed0f08e5822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CanAttack>k__BackingField: 0
+  setCanAttackWhenTriggeredPlayer: 0
+  enemyTriggerController: {fileID: 326739984079655757}
 --- !u!1 &1202277497017728310
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +171,7 @@ MonoBehaviour:
   enemy: {fileID: 0}
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 2112
   <EnemyTriggerDetector>k__BackingField: {fileID: 0}
 --- !u!1 &3928398004214033554
 GameObject:
